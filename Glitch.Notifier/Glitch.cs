@@ -11,6 +11,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Glitch.Notifier
 {
+    //Static or instance? 
     public static class Glitch
     {
         public static readonly GlitchConfig Config = new GlitchConfig();
