@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Glitch.Notifier.AspNet
 {
-    public class WebFormsHttpModule:IHttpModule
+    public class GlitchHttpModule:IHttpModule
     {
         public void Init(HttpApplication context)
         {
