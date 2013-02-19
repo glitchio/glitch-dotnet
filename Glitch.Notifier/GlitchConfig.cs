@@ -36,7 +36,15 @@ namespace Glitch.Notifier
             private set { _errorProfile = value; }
         }
 
-        internal string Scheme
+        internal string Url
+        {
+            get
+            {
+                return Glitch.Config.Scheme + "://api.glitch.io/v1/errors";
+            }
+        }
+
+        private string Scheme
         {
             get { return IsHttps ? "https" : "http"; }
         }
