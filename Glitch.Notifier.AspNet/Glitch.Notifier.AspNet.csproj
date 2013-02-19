@@ -33,6 +33,10 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>External Assemblies\System.Web.Http.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>External Assemblies\System.Web.Mvc.dll</HintPath>
@@ -45,7 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ErrorExtensions.cs" />
-    <Compile Include="GlitchHandleErrorAttribute.cs" />
+    <Compile Include="Mvc\GlitchHandleErrorAttribute.cs" />
+    <Compile Include="Http\GlitchExceptionFilterAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GlitchHttpModule.cs" />
   </ItemGroup>
@@ -56,6 +61,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="External Assemblies\System.Web.Http.dll" />
     <Content Include="External Assemblies\System.Web.Mvc.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
