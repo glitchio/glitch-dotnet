@@ -21,20 +21,26 @@ namespace Glitch.Notifier
 
         public static void HandleWebException(this WebException exception)
         {
+            throw exception.WrapException();
+        }
+
+        public static Exception WrapException(this WebException exception)
+        {
             var response = exception.Response as HttpWebResponse;
-            if (response == null) return;
+            if (response == null) return exception;
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                throw new UnauthorizedAccessException("Unauthorized", exception);
+                return new UnauthorizedAccessException("Unauthorized", exception);
             }
             if (response.StatusCode == HttpStatusCode.BadRequest || response.StatusCode == HttpStatusCode.Conflict)
             {
-                throw new ArgumentException(GetError(response), exception);
+                return new ArgumentException(GetError(response), exception);
             }
             if (response.StatusCode == HttpStatusCode.InternalServerError)
             {
-                throw new InvalidOperationException("Internal Server error", exception);
+                return new InvalidOperationException("Internal Server error", exception);
             }
+            return exception;
         }
 
         private static string GetError(HttpWebResponse response)
