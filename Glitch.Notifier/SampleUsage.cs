@@ -13,10 +13,10 @@ namespace Glitch.Notifier
                 .UseHttps()
                 .UseDefaultErrorProfile("my-profile");
 
-            Glitch.Error("error")
+            Glitch.Notify("error")
                   .WithErrorProfile("my-other-profile")
                   .With("controller", "AccountController")
-                  .Notify();
+                  .Send();
         }
     }
 }

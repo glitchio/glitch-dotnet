@@ -16,12 +16,12 @@ namespace Glitch.Notifier
     {
         public static readonly GlitchConfig Config = new GlitchConfig();
 
-        public static Error Error(string errorMessage)
+        public static Error Notify(string errorMessage)
         {
             return new Error(errorMessage);
         }
 
-        public static Error Error(Exception exception, Dictionary<string, object> extraData, string errorProfile, string groupKey)
+        public static Error Notify(Exception exception)
         {
             return new Error(exception);
         }

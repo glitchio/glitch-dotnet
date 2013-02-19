@@ -56,16 +56,16 @@ namespace Glitch.Notifier
             return this;
         }
 
-        public void Notify()
+        public void Send()
         {
             ApplyDefaultsIfNeeded();
-            Notifier.Notify(this);
+            NotificationSender.Send(this);
         }
 
-        public Task NotifyAsync()
+        public Task SendAsync()
         {
             ApplyDefaultsIfNeeded();
-            return Notifier.NotifyAsync(this);
+            return NotificationSender.SendAsync(this);
         }
 
         private void ApplyDefaultsIfNeeded()

@@ -49,7 +49,7 @@
     <Compile Include="Crypto.cs" />
     <Compile Include="GlitchConfig.cs" />
     <Compile Include="HttpRequestExtensions.cs" />
-    <Compile Include="Notifier.cs" />
+    <Compile Include="NotificationSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleUsage.cs" />
   </ItemGroup>
