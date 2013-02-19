@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Glitch.Notifier")]
+[assembly: AssemblyTitle("Glitch.Notifier.AspNet")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Glitch.io")]
-[assembly: AssemblyProduct("Glitch.Notifier")]
+[assembly: AssemblyProduct("Glitch.Notifier.AspNet")]
 [assembly: AssemblyCopyright("Copyright © Glitch.io 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ae346c04-b2ff-490a-8c2d-ad3e9a693169")]
+[assembly: Guid("b046c7c8-b9d6-4300-8247-ca6de24ba7ad")]
 
 // Version information for an assembly consists of the following four values:
 //

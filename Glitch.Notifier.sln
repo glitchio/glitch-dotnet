@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glitch.Notifier", "Glitch.Notifier\Glitch.Notifier.csproj", "{EDCBA660-02E2-4824-9C8D-33F98B8AA3BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glitch.Notifier.AspNet", "Glitch.Notifier.AspNet\Glitch.Notifier.AspNet.csproj", "{66611FEB-FFFA-4FB7-A855-E603797132FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{EDCBA660-02E2-4824-9C8D-33F98B8AA3BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDCBA660-02E2-4824-9C8D-33F98B8AA3BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDCBA660-02E2-4824-9C8D-33F98B8AA3BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66611FEB-FFFA-4FB7-A855-E603797132FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66611FEB-FFFA-4FB7-A855-E603797132FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66611FEB-FFFA-4FB7-A855-E603797132FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66611FEB-FFFA-4FB7-A855-E603797132FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
