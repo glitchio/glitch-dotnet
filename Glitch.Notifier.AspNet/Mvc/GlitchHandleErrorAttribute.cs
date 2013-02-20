@@ -6,10 +6,8 @@ namespace Glitch.Notifier.AspNet.Mvc
     {
         public override void OnException(ExceptionContext exceptionContext)
         {
-            Glitch.Notify(exceptionContext.Exception)
-                  .WithHttpContextData()
-                  .With("Controller", exceptionContext.RouteData.Values["controller"])
-                  .With("Action", exceptionContext.RouteData.Values["action"])
+            Glitch.Factory.MvcError(exceptionContext)
+                  .WithContextData()
                   .WithErrorProfile("v1.net.mvc")
                   .Send();
 

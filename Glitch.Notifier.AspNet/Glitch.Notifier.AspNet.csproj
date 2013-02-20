@@ -49,12 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ErrorExtensions.cs" />
-    <Compile Include="Http\ErrorExtensions.cs" />
+    <Compile Include="WebForms\WebFormsError.cs" />
+    <Compile Include="Http\WebApiError.cs" />
+    <Compile Include="Http\GlitchErrorFactoryExtensions.cs" />
+    <Compile Include="Mvc\GlitchErrorFactoryExtensions.cs" />
     <Compile Include="Mvc\GlitchHandleErrorAttribute.cs" />
     <Compile Include="Http\GlitchExceptionFilterAttribute.cs" />
+    <Compile Include="Mvc\MvcError.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GlitchHttpModule.cs" />
+    <Compile Include="WebForms\GlitchErrorFactoryExtensions.cs" />
+    <Compile Include="WebForms\GlitchHttpModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Glitch.Notifier\Glitch.Notifier.csproj">

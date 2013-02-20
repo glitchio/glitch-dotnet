@@ -10,7 +10,7 @@ namespace Glitch.Notifier.AspNet.Http
     {
         public override void OnException(HttpActionExecutedContext actionExecutedContext)
         {
-            Glitch.Factory.Error(actionExecutedContext)
+            Glitch.Factory.WebApiError(actionExecutedContext)
                  .WithContextData()
                  .WithErrorProfile("v1.net.webapi")
                  .Send();

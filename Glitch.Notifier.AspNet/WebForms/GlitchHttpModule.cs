@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web;
 
-namespace Glitch.Notifier.AspNet
+namespace Glitch.Notifier.AspNet.WebForms
 {
     public class GlitchHttpModule:IHttpModule
     {
@@ -14,8 +14,8 @@ namespace Glitch.Notifier.AspNet
         {
             var exception = HttpContext.Current.Server.GetLastError();
 
-            Glitch.Notify(exception)
-                  .WithHttpContextData()
+            Glitch.Factory.WebFormsError(exception, HttpContext.Current)
+                  .WithContextData()
                   .WithErrorProfile("v1.net.webforms")
                   .Send();
 
