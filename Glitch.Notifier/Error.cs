@@ -8,7 +8,7 @@ namespace Glitch.Notifier
     {
         private readonly Exception _exception;
 
-        internal Error(string errorMessage)
+        public Error(string errorMessage)
         {
             if (string.IsNullOrWhiteSpace(errorMessage)) throw new ArgumentException("errorMessage cannot be null or empty");
             ExtraData = new Dictionary<string, object>();
@@ -17,7 +17,7 @@ namespace Glitch.Notifier
             OccurredAt = DateTime.Now;
         }
 
-        internal Error(Exception exception)
+        public Error(Exception exception)
             : this(exception.Message)
         {
             if (exception == null) throw new ArgumentNullException("exception");

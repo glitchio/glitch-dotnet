@@ -16,6 +16,8 @@ namespace Glitch.Notifier
     {
         public static readonly GlitchConfig Config = new GlitchConfig();
 
+        public static readonly  GlitchErrorFactory Factory = new GlitchErrorFactory();
+
         public static Error Notify(string errorMessage)
         {
             return new Error(errorMessage);

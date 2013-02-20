@@ -48,6 +48,7 @@
     <Compile Include="Glitch.cs" />
     <Compile Include="Crypto.cs" />
     <Compile Include="GlitchConfig.cs" />
+    <Compile Include="GlitchErrorFactory.cs" />
     <Compile Include="HttpRequestExtensions.cs" />
     <Compile Include="NotificationSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

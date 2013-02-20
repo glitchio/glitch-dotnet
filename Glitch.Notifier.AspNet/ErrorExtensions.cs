@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
 using System.Web;
 
 namespace Glitch.Notifier.AspNet
@@ -14,6 +12,7 @@ namespace Glitch.Notifier.AspNet
             return error.WithHttpHeaders()
                 .WithQueryString()
                 .WithUrl()
+                .WithHttpMethod()
                 .WithCurrentUser();
         }
 
@@ -60,6 +59,12 @@ namespace Glitch.Notifier.AspNet
         public static Error WithUser(this Error error, string user)
         {
             error.With("User", user);
+            return error;
+        }
+
+        public static Error WithHttpMethod(this Error error)
+        {
+            error.With("HttpMethod", HttpContext.Current.Request.HttpMethod);
             return error;
         }
 

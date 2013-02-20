@@ -10,15 +10,11 @@ namespace Glitch.Notifier.AspNet.Http
     {
         public override void OnException(HttpActionExecutedContext actionExecutedContext)
         {
-            Glitch.Notify(actionExecutedContext.Exception)
-                 .WithCurrentUser()
-                 .WithHttpHeaders()
-                 .WithQueryString()
-                 .WithUrl()
-                 .With("Controller", actionExecutedContext.ActionContext.ControllerContext.RouteData.Values["controller"])
-                 .With("Action", actionExecutedContext.ActionContext.ControllerContext.RouteData.Values["action"])
+            Glitch.Factory.Error(actionExecutedContext)
+                 .WithContextData()
                  .WithErrorProfile("v1.net.webapi")
                  .Send();
+
             base.OnException(actionExecutedContext);
         }
     }
