@@ -9,32 +9,33 @@ namespace Glitch.Notifier.AspNet
 {
     public static class ErrorExtensions
     {
+        public static Error WithHttpContextData(this Error error)
+        {
+            return error.WithHttpHeaders()
+                .WithQueryString()
+                .WithUrl()
+                .WithCurrentUser();
+        }
+
         public static Error WithHttpHeaders(this Error error)
         {
-            CheckHttpContextCurrent();
+            if (HttpContext.Current == null) return error;
             var sourceHeaders = HttpContext.Current.Request.Headers;
             var headers = ToDictionary(sourceHeaders);
             error.With("HttpHeaders", headers);
             return error;
         }
 
-        private static Dictionary<string, string> ToDictionary(NameValueCollection sourceHeaders)
-        {
-            return sourceHeaders.Cast<string>()
-                .Select(s => new { Key = s, Value = sourceHeaders[s] })
-                .ToDictionary(p => p.Key, p => p.Value);
-        }
-
         public static Error WithUrl(this Error error)
         {
-            CheckHttpContextCurrent();
+            if (HttpContext.Current == null) return error;
             error.With("Url", HttpContext.Current.Request.Url.ToString());
             return error;
         }
 
         public static Error WithQueryString(this Error error)
         {
-            CheckHttpContextCurrent();
+            if (HttpContext.Current == null) return error;
             var source = HttpContext.Current.Request.QueryString;
             if (source.AllKeys.Any())
             {
@@ -46,7 +47,7 @@ namespace Glitch.Notifier.AspNet
 
         public static Error WithCurrentUser(this Error error)
         {
-            CheckHttpContextCurrent();
+            if (HttpContext.Current == null) return error;
             var user = "anonymous";
             if (HttpContext.Current.User != null)
             {
@@ -62,9 +63,11 @@ namespace Glitch.Notifier.AspNet
             return error;
         }
 
-        private static void CheckHttpContextCurrent()
+        private static Dictionary<string, string> ToDictionary(NameValueCollection sourceHeaders)
         {
-            if (HttpContext.Current == null) throw new InvalidOperationException("HttpContext.Current cannot be null");
+            return sourceHeaders.Cast<string>()
+                .Select(s => new { Key = s, Value = sourceHeaders[s] })
+                .ToDictionary(p => p.Key, p => p.Value);
         }
     }
 }

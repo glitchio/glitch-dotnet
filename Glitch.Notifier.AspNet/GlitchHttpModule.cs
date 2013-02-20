@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web;
 
 namespace Glitch.Notifier.AspNet
@@ -18,10 +15,7 @@ namespace Glitch.Notifier.AspNet
             var exception = HttpContext.Current.Server.GetLastError();
 
             Glitch.Notify(exception)
-                  .WithCurrentUser()
-                  .WithHttpHeaders()
-                  .WithQueryString()
-                  .WithUrl()
+                  .WithHttpContextData()
                   .WithErrorProfile("v1.net.webforms")
                   .Send();
 

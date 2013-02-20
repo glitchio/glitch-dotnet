@@ -11,10 +11,7 @@ namespace Glitch.Notifier.AspNet.Mvc
         public override void OnException(ExceptionContext exceptionContext)
         {
             Glitch.Notify(exceptionContext.Exception)
-                  .WithCurrentUser()
-                  .WithHttpHeaders()
-                  .WithQueryString()
-                  .WithUrl()
+                  .WithHttpContextData()
                   .With("Controller", exceptionContext.RouteData.Values["controller"])
                   .With("Action", exceptionContext.RouteData.Values["action"])
                   .WithErrorProfile("v1.net.mvc")
