@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using Glitch.Notifier.AspNet.Shared;
 
 namespace Glitch.Notifier.AspNet.WebForms
 {

@@ -8,7 +8,7 @@ namespace Glitch.Notifier
 {
     public abstract class ErrorContextWrapper
     {
-        protected Error Error { get; private set; }
+        public Error Error { get; private set; }
 
         protected ErrorContextWrapper(Error error)
         {

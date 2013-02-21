@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Shared\HttpContextBaseExtensions.cs" />
+    <Compile Include="Shared\HttpContextError.cs" />
     <Compile Include="WebForms\WebFormsError.cs" />
     <Compile Include="Http\WebApiError.cs" />
     <Compile Include="Http\GlitchErrorFactoryExtensions.cs" />
