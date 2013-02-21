@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Http.Filters;
+using System.Net.Http;
+using System.Web.Http.Hosting;
 
 namespace Glitch.Notifier.AspNet.Http
 {
@@ -10,19 +13,20 @@ namespace Glitch.Notifier.AspNet.Http
         private readonly HttpActionExecutedContext _context;
 
         public WebApiError(HttpActionExecutedContext context)
-            :base(new Error(context.Exception), "v1.net.webapi")
+            : base(new Error(context.Exception), "v1.net.webapi")
         {
             _context = context;
         }
 
         public WebApiError WithContextData()
         {
-            WithHttpHeaders();
-            WithHttpMethod();
-            WithUrl();
-            WithController();
-            WithAction();
-            return this;
+            return WithHttpHeaders()
+                .WithHttpMethod()
+                .WithUrl()
+                .WithController()
+                .WithAction()
+                .WithQueryString()
+                .WithCurrentUser();
         }
 
         public WebApiError WithHttpHeaders()
@@ -52,6 +56,34 @@ namespace Glitch.Notifier.AspNet.Http
         public WebApiError WithHttpMethod()
         {
             Error.With("HttpMethod", _context.ActionContext.Request.Method.Method);
+            return this;
+        }
+
+        public WebApiError WithCurrentUser()
+        {
+            if (HttpContext.Current == null) return this;
+            var user = "anonymous";
+            if (HttpContext.Current.User != null && HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                user = HttpContext.Current.User.Identity.Name;
+            }
+
+            return WithUser(user);
+        }
+
+        public WebApiError WithQueryString()
+        {
+            var queryString = _context.Request.GetQueryNameValuePairs().ToDictionary(q => q.Key, q => q.Value);
+            if (queryString.Keys.Count > 0)
+            {
+                Error.With("QueryString", queryString);
+            }
+            return this;
+        }
+
+        public WebApiError WithUser(string user)
+        {
+            Error.With("User", user);
             return this;
         }
 

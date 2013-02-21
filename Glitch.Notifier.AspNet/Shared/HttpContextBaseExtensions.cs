@@ -34,7 +34,7 @@ namespace Glitch.Notifier.AspNet.Shared
         public static string GetCurrentUser(this HttpContextBase context)
         {
             var user = "anonymous";
-            if (context.User != null)
+            if (context.User != null && context.User.Identity.IsAuthenticated)
             {
                 user = context.User.Identity.Name;
             }
