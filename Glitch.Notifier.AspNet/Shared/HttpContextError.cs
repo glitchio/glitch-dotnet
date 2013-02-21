@@ -10,7 +10,7 @@ namespace Glitch.Notifier.AspNet.Shared
     {
         public HttpContextBase HttpContext { get; private set; }
 
-        public HttpContextError(Exception exception, HttpContextBase httpContext, string errorProfile)
+        public HttpContextError(Exception exception, HttpContextBase httpContext, string errorProfile = "v1.net.asp")
             : base(new Error(exception), errorProfile)
         {
             HttpContext = httpContext;

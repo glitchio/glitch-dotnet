@@ -56,7 +56,7 @@
     <Compile Include="Http\GlitchErrorFactoryExtensions.cs" />
     <Compile Include="Mvc\GlitchErrorFactoryExtensions.cs" />
     <Compile Include="Mvc\GlitchHandleErrorAttribute.cs" />
-    <Compile Include="Http\GlitchExceptionFilterAttribute.cs" />
+    <Compile Include="Http\GlitchWebApiHandleErrorFilter.cs" />
     <Compile Include="Mvc\MvcError.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebForms\GlitchErrorFactoryExtensions.cs" />

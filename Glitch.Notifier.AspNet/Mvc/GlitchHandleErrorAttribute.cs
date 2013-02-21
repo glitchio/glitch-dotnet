@@ -7,11 +7,13 @@ namespace Glitch.Notifier.AspNet.Mvc
     {
         public override void OnException(ExceptionContext exceptionContext)
         {
-            Glitch.Factory.MvcError(exceptionContext)
-                  .WithContextData()
-                  .Send();
-
             base.OnException(exceptionContext);
+            if (exceptionContext.ExceptionHandled)
+            {
+                Glitch.Factory.MvcError(exceptionContext)
+                    .WithContextData()
+                    .Send();
+            }
         }
     }
 }
