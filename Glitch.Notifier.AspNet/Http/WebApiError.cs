@@ -59,13 +59,7 @@ namespace Glitch.Notifier.AspNet.Http
         public WebApiError WithCurrentUser()
         {
             if (HttpContext.Current == null) return this;
-            var user = "anonymous";
-            if (HttpContext.Current.User != null && HttpContext.Current.User.Identity.IsAuthenticated)
-            {
-                user = HttpContext.Current.User.Identity.Name;
-            }
-
-            return WithUser(user);
+            return WithUser(new HttpContextWrapper(HttpContext.Current).GetCurrentUser());
         }
 
         public WebApiError WithQueryString()
@@ -84,6 +78,18 @@ namespace Glitch.Notifier.AspNet.Http
             return this;
         }
 
+        public WebApiError WithServerInfo()
+        {
+            Error.With("ServerInfo", Utils.GetServerInfo());
+            return this;
+        }
+
+        public WebApiError WithClientInfo()
+        {
+            if (HttpContext.Current == null) return this;
+            Error.With("ClientInfo", new HttpContextWrapper(HttpContext.Current).GetClientInfo());
+            return this;
+        }
 
         public WebApiError WithErrorProfile(string errorProfile)
         {

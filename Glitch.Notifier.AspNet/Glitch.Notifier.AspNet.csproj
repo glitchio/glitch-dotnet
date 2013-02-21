@@ -52,6 +52,7 @@
     <Compile Include="GlitchErrorFactoryExtensions.cs" />
     <Compile Include="HttpContextBaseExtensions.cs" />
     <Compile Include="HttpContextError.cs" />
+    <Compile Include="Utils.cs" />
     <Compile Include="WebForms\WebFormsError.cs" />
     <Compile Include="Http\WebApiError.cs" />
     <Compile Include="Http\GlitchErrorFactoryExtensions.cs" />

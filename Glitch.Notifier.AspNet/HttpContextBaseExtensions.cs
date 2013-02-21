@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Glitch.Notifier.AspNet
     {
         public static string GetUrl(this HttpContextBase context)
         {
-           return context.Request.Url.ToString();
+            return context.Request.Url.ToString();
         }
 
         public static IDictionary GetHttpHeaders(this HttpContextBase context)
@@ -42,6 +43,15 @@ namespace Glitch.Notifier.AspNet
         public static string GetHttpMethod(this HttpContextBase context)
         {
             return context.Request.HttpMethod;
+        }
+
+        public static Dictionary<string, string> GetClientInfo(this HttpContextBase context)
+        {
+            return new Dictionary<string, string>
+                       {
+                           {"Host", context.Request.UserHostName},
+                           {"Ip", context.Request.UserHostAddress },
+                       };
         }
 
         private static Dictionary<string, string> ToDictionary(NameValueCollection sourceHeaders)

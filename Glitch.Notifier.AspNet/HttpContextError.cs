@@ -24,7 +24,9 @@ namespace Glitch.Notifier.AspNet
                     .WithHttpHeaders()
                     .WithHttpMethod()
                     .WithUrl()
-                    .WithQueryString();
+                    .WithQueryString()
+                    .WithServerInfo()
+                    .WithClientInfo();
         }
 
         public static T WithHttpHeaders<T>(this T wrapper) where T:HttpContextError
@@ -65,6 +67,18 @@ namespace Glitch.Notifier.AspNet
         public static T WithErrorProfile<T>(this T wrapper, string errorProfile) where T : HttpContextError
         {
             wrapper.Error.WithErrorProfile(errorProfile);
+            return wrapper;
+        }
+
+        public static T WithServerInfo<T>(this T wrapper) where T: HttpContextError
+        {
+            wrapper.Error.With("ServerInfo", Utils.GetServerInfo());
+            return wrapper;
+        }
+
+        public static T WithClientInfo<T>(this T wrapper) where T:HttpContextError
+        {
+            wrapper.Error.With("ClientInfo", wrapper.HttpContext.GetClientInfo());
             return wrapper;
         }
     }
