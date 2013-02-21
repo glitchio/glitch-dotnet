@@ -11,6 +11,7 @@ namespace Glitch.Notifier.AspNet
             : base(new Error(exception), errorProfile)
         {
             HttpContext = httpContext;
+            Error.WithLocation(HttpContext.GetUrl());
         }
     }
 
@@ -49,12 +50,7 @@ namespace Glitch.Notifier.AspNet
 
         public static T WithCurrentUser<T>(this T wrapper) where T : HttpError
         {
-            return wrapper.WithUser(wrapper.HttpContext.GetCurrentUser());
-        }
-
-        public static T WithUser<T>(this T wrapper, string user) where T : HttpError
-        {
-            wrapper.Error.With("User",user);
+            wrapper.Error.WithUser(wrapper.HttpContext.GetCurrentUser());
             return wrapper;
         }
 

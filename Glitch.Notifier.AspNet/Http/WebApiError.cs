@@ -13,6 +13,7 @@ namespace Glitch.Notifier.AspNet.Http
             : base(new Error(context.Exception), "v1.net.webapi")
         {
             _context = context;
+            Error.WithLocation(GetController() + "#" + GetAction());
         }
 
         public WebApiError WithContextData()
@@ -34,13 +35,13 @@ namespace Glitch.Notifier.AspNet.Http
 
         public WebApiError WithController()
         {
-            Error.With("Controller", _context.ActionContext.ControllerContext.RouteData.Values["controller"]);
+            Error.With("Controller", GetController());
             return this;
         }
 
         public WebApiError WithAction()
         {
-            Error.With("Action", _context.ActionContext.ControllerContext.RouteData.Values["action"]);
+            Error.With("Action", GetAction());
             return this;
         }
 
@@ -59,7 +60,8 @@ namespace Glitch.Notifier.AspNet.Http
         public WebApiError WithCurrentUser()
         {
             if (HttpContext.Current == null) return this;
-            return WithUser(new HttpContextWrapper(HttpContext.Current).GetCurrentUser());
+            Error.WithUser(new HttpContextWrapper(HttpContext.Current).GetCurrentUser());
+            return this;
         }
 
         public WebApiError WithQueryString()
@@ -69,12 +71,6 @@ namespace Glitch.Notifier.AspNet.Http
             {
                 Error.With("QueryString", queryString);
             }
-            return this;
-        }
-
-        public WebApiError WithUser(string user)
-        {
-            Error.With("User", user);
             return this;
         }
 
@@ -95,6 +91,16 @@ namespace Glitch.Notifier.AspNet.Http
         {
             Error.WithErrorProfile(errorProfile);
             return this;
+        }
+
+        private string GetController()
+        {
+            return _context.ActionContext.ControllerContext.RouteData.Values["controller"] as string;
+        }
+
+        private string GetAction()
+        {
+            return _context.ActionContext.ControllerContext.RouteData.Values["action"] as string;
         }
     }
 }

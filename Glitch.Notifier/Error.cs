@@ -32,11 +32,25 @@ namespace Glitch.Notifier
         internal string Profile { get; set; }
         internal string GroupKey { get; set; }
         internal DateTime OccurredAt { get; set; }
+        internal string User { get; set; }
+        internal string Location { get; set; }
 
         public Error WithErrorProfile(string profile)
         {
             if (string.IsNullOrWhiteSpace(profile)) throw new ArgumentException("profile cannot be null or empty");
             Profile = profile;
+            return this;
+        }
+
+        public Error WithUser(string user)
+        {
+            User = user;
+            return this;
+        }
+
+        public Error WithLocation(string location)
+        {
+            Location = location;
             return this;
         }
 

@@ -10,6 +10,7 @@ namespace Glitch.Notifier.AspNet.Mvc
             : base(exceptionContext.Exception, exceptionContext.HttpContext, "v1.net.mvc")
         {
             _exceptionContext = exceptionContext;
+            Error.WithLocation(GetController() + "#" + GetAction());
         }
 
         public MvcError WithContextData()
@@ -23,14 +24,24 @@ namespace Glitch.Notifier.AspNet.Mvc
 
         public MvcError WithController()
         {
-            Error.With("Controller", _exceptionContext.RouteData.Values["controller"]);
+            Error.With("Controller", GetController());
             return this;
         }
 
         public MvcError WithAction()
         {
-            Error.With("Action", _exceptionContext.RouteData.Values["action"]);
+            Error.With("Action", GetAction());
             return this;
+        }
+
+        private string GetController()
+        {
+            return _exceptionContext.RouteData.Values["controller"] as string;
+        }
+
+        private string GetAction()
+        {
+            return _exceptionContext.RouteData.Values["action"] as string;
         }
     }
 }
