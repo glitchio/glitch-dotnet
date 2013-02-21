@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Error.cs" />
-    <Compile Include="ErrorContextWrapper.cs" />
+    <Compile Include="ErrorWrapper.cs" />
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="Glitch.cs" />
     <Compile Include="Crypto.cs" />

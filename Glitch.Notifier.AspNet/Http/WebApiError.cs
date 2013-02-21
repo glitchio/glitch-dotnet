@@ -5,7 +5,7 @@ using System.Net.Http;
 
 namespace Glitch.Notifier.AspNet.Http
 {
-    public class WebApiError : ErrorContextWrapper
+    public class WebApiError : ErrorWrapper
     {
         private readonly HttpActionExecutedContext _context;
 

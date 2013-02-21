@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Glitch.Notifier
 {
-    public abstract class ErrorContextWrapper
+    public abstract class ErrorWrapper
     {
         public Error Error { get; private set; }
 
-        protected ErrorContextWrapper(Error error, string errorProfile)
+        protected ErrorWrapper(Error error, string errorProfile)
         {
             Error = error;
             Error.WithErrorProfile(errorProfile);
