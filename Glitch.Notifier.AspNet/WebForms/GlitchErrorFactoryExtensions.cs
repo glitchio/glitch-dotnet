@@ -1,6 +1,5 @@
 using System;
 using System.Web;
-using System.Web.Http.Filters;
 
 namespace Glitch.Notifier.AspNet.WebForms
 {

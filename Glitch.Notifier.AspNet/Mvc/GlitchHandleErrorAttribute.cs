@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using Glitch.Notifier.AspNet.Shared;
 
 namespace Glitch.Notifier.AspNet.Mvc
 {

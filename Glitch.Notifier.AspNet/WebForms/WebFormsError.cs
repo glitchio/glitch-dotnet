@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
 using System.Web;
-using Glitch.Notifier.AspNet.Shared;
 
 namespace Glitch.Notifier.AspNet.WebForms
 {

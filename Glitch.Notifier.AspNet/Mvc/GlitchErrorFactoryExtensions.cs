@@ -1,4 +1,3 @@
-using System.Web.Http.Filters;
 using System.Web.Mvc;
 
 namespace Glitch.Notifier.AspNet.Mvc

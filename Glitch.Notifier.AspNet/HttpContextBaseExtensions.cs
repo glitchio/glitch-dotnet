@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
 using System.Web;
 
-namespace Glitch.Notifier.AspNet.Shared
+namespace Glitch.Notifier.AspNet
 {
     static class HttpContextBaseExtensions
     {
