@@ -9,8 +9,8 @@ namespace Glitch.Notifier.AspNet.WebForms
 {
     public class WebFormsError: HttpContextError
     {
-        public WebFormsError(Exception exception, HttpContext context) 
-            : base(exception, new HttpContextWrapper(context))
+        public WebFormsError(Exception exception, HttpContext context)
+            : base(exception, new HttpContextWrapper(context), "v1.net.webforms")
         {
         
         }

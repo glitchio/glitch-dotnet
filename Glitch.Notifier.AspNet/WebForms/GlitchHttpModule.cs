@@ -17,7 +17,6 @@ namespace Glitch.Notifier.AspNet.WebForms
 
             Glitch.Factory.WebFormsError(exception, HttpContext.Current)
                   .WithContextData()
-                  .WithErrorProfile("v1.net.webforms")
                   .Send();
 
             HttpContext.Current.Server.ClearError();

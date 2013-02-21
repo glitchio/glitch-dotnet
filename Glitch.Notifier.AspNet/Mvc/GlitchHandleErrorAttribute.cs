@@ -9,7 +9,6 @@ namespace Glitch.Notifier.AspNet.Mvc
         {
             Glitch.Factory.MvcError(exceptionContext)
                   .WithContextData()
-                  .WithErrorProfile("v1.net.mvc")
                   .Send();
 
             base.OnException(exceptionContext);

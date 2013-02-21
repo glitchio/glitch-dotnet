@@ -12,7 +12,6 @@ namespace Glitch.Notifier.AspNet.Http
         {
             Glitch.Factory.WebApiError(actionExecutedContext)
                  .WithContextData()
-                 .WithErrorProfile("v1.net.webapi")
                  .Send();
 
             base.OnException(actionExecutedContext);

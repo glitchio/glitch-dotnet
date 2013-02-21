@@ -12,7 +12,7 @@ namespace Glitch.Notifier.AspNet.Mvc
         private readonly ExceptionContext _exceptionContext;
 
         public MvcError(ExceptionContext exceptionContext)
-            : base(exceptionContext.Exception, exceptionContext.HttpContext)
+            : base(exceptionContext.Exception, exceptionContext.HttpContext, "v1.net.mvc")
         {
             _exceptionContext = exceptionContext;
         }
