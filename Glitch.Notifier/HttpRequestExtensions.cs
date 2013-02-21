@@ -10,7 +10,7 @@ namespace Glitch.Notifier
         {
             var apiKey = Glitch.Config.ApiKey;
             if (String.IsNullOrWhiteSpace(apiKey))
-                throw new ConfigurationErrorsException("api Key must be configured");
+                throw new ConfigurationErrorsException("apiKey must be configured");
             request.Headers.Add(HttpRequestHeader.Authorization, "key " + apiKey);
         }
     }

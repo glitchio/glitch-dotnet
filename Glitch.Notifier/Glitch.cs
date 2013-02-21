@@ -14,9 +14,14 @@ namespace Glitch.Notifier
     //Static or instance? 
     public static class Glitch
     {
-        public static readonly GlitchConfig Config = new GlitchConfig();
+        public static readonly GlitchConfig Config;
 
-        public static readonly  GlitchErrorFactory Factory = new GlitchErrorFactory();
+        public static readonly GlitchErrorFactory Factory = new GlitchErrorFactory();
+
+        static Glitch()
+        {
+            Config = new GlitchConfig(ConfigurationManager.GetSection("glitch") as GlitchConfigSection);
+        }
 
         public static Error Notify(string errorMessage)
         {
@@ -27,6 +32,6 @@ namespace Glitch.Notifier
         {
             return new Error(exception);
         }
-        
+
     }
 }

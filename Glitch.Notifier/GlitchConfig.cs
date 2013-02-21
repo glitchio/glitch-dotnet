@@ -7,6 +7,13 @@ namespace Glitch.Notifier
 {
     public class GlitchConfig
     {
+        public GlitchConfig(GlitchConfigSection section)
+        {
+            if (section == null) return;
+            UseApiKey(section.ApiKey);
+            if (section.UseHttps) UseHttps();
+        }
+
         public GlitchConfig UseApiKey(string apiKey)
         {
             ApiKey = apiKey;
