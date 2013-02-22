@@ -10,7 +10,7 @@ namespace Glitch.Notifier.AspNet.Http
         private readonly HttpActionExecutedContext _context;
 
         public WebApiError(HttpActionExecutedContext context)
-            : base(new Error(context.Exception), "v1.net.webapi")
+            : base(new Error(context.Exception))
         {
             _context = context;
             Error.WithLocation(GetController() + "#" + GetAction());

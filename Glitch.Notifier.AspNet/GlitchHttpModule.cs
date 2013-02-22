@@ -5,16 +5,22 @@ namespace Glitch.Notifier.AspNet
 {
     public class GlitchHttpModule:IHttpModule
     {
+        public GlitchHttpModule()
+        {
+            ErrorProfile = "v1.net.asp";
+        }
+
+        public string ErrorProfile { get; set; }
         public void Init(HttpApplication context)
         {
             context.Error += ContextError;
         }
 
-        static void ContextError(object sender, EventArgs e)
+        void ContextError(object sender, EventArgs e)
         {
             var exception = HttpContext.Current.Server.GetLastError();
 
-            Glitch.Factory.HttpContextError(exception, HttpContext.Current)
+            Glitch.Factory.HttpContextError(exception, HttpContext.Current, ErrorProfile)
                   .WithContextData()
                   .Send();
 

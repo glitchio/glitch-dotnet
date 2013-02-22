@@ -7,7 +7,7 @@ namespace Glitch.Notifier.AspNet.Mvc
         private readonly ExceptionContext _exceptionContext;
 
         public MvcError(ExceptionContext exceptionContext)
-            : base(exceptionContext.Exception, exceptionContext.HttpContext, "v1.net.mvc")
+            : base(exceptionContext.Exception, exceptionContext.HttpContext)
         {
             _exceptionContext = exceptionContext;
             Error.WithLocation(GetController() + "#" + GetAction());

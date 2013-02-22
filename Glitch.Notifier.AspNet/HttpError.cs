@@ -7,8 +7,8 @@ namespace Glitch.Notifier.AspNet
     {
         public HttpContextBase HttpContext { get; private set; }
 
-        public HttpError(Exception exception, HttpContextBase httpContext, string errorProfile = "v1.net.asp")
-            : base(new Error(exception), errorProfile)
+        public HttpError(Exception exception, HttpContextBase httpContext)
+            : base(new Error(exception))
         {
             HttpContext = httpContext;
             Error.WithLocation(HttpContext.GetUrl());

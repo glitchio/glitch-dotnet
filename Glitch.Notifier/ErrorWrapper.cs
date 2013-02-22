@@ -10,10 +10,9 @@ namespace Glitch.Notifier
     {
         public Error Error { get; private set; }
 
-        protected ErrorWrapper(Error error, string errorProfile)
+        protected ErrorWrapper(Error error)
         {
             Error = error;
-            Error.WithErrorProfile(errorProfile);
         }
 
         public void Send()
