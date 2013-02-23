@@ -30,7 +30,7 @@ namespace Glitch.Notifier
             if (response == null) return exception;
             if (response.StatusCode == HttpStatusCode.Unauthorized)
             {
-                return new UnauthorizedAccessException("Unauthorized", exception);
+                return new UnauthorizedAccessException("Glitch.io: Unauthorized. Check your apiKey please.", exception);
             }
             if (response.StatusCode == HttpStatusCode.BadRequest || response.StatusCode == HttpStatusCode.Conflict)
             {
@@ -38,7 +38,7 @@ namespace Glitch.Notifier
             }
             if (response.StatusCode == HttpStatusCode.InternalServerError)
             {
-                return new InvalidOperationException("Internal Server error", exception);
+                return new InvalidOperationException("Glitch.io: Internal Server error", exception);
             }
             return exception;
         }

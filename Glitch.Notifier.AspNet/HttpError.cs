@@ -44,7 +44,7 @@ namespace Glitch.Notifier.AspNet
 
         public static T WithQueryString<T>(this T wrapper) where T : HttpError
         {
-            wrapper.Error.With("HttpHeaders", wrapper.HttpContext.GetHttpHeaders());
+            wrapper.Error.With("QueryString", wrapper.HttpContext.GetHttpHeaders());
             return wrapper;
         }
 

@@ -66,7 +66,7 @@ namespace Glitch.Notifier
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentException("key cannot be null or empty");
             if (value == null) throw new ArgumentNullException("value");
 
-            ExtraData.Add(key, value);
+            ExtraData[key] = value;
             return this;
         }
 

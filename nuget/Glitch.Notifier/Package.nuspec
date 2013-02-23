@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Glitch.Notifier</id>
+    <version>0.1.0</version>
+    <authors>Javier Crespo / Stijn Roosen</authors>
+    <owners>Glitch.io</owners>
+    <!--<licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>-->
+    <projectUrl>https://github.com/glitchio/glitch-dotnet</projectUrl>
+    <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Glitch.io .NET core notifier</description>
+    <releaseNotes>Initial version.</releaseNotes>
+    <copyright>Copyright Glitch.io 2013</copyright>
+    <tags>Glitch.io error logging unhandled exception</tags>
+    <dependencies>
+    </dependencies>
+  </metadata>
+</package>

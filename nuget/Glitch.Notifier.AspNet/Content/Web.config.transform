@@ -1,0 +1,21 @@
+<configuration>
+  <system.web>
+    <httpModules>
+      <!--
+      This is a catch-all notifier for ASP.NET webforms and other errors that are not handled 
+      with the MVC or the WebApi error filters
+      -->
+      <add name="GlitchNotifier" type="Glitch.Notifier.AspNet.GlitchHttpModule, Glitch.Notifier.AspNet"/>
+    </httpModules>
+  </system.web>
+  <system.webServer>
+    <validation validateIntegratedModeConfiguration="false" />
+    <modules>
+       <!--
+      This is a catch-all notifier for ASP.NET webforms and other errors that are not handled 
+      with the MVC or the WebApi error filters
+      -->
+      <add name="GlitchNotifier" type="Glitch.Notifier.AspNet.GlitchHttpModule, Glitch.Notifier.AspNet"/>
+    </modules>
+  </system.webServer>
+</configuration>
