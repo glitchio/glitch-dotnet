@@ -11,7 +11,8 @@ namespace Glitch.Notifier
         {
             if (section == null) return;
             UseApiKey(section.ApiKey);
-            if (section.UseHttps) UseHttps();
+            UseHttps(section.UseHttps);
+            SendNotifications(section.Notify);
         }
 
         public GlitchConfig UseApiKey(string apiKey)
@@ -20,9 +21,15 @@ namespace Glitch.Notifier
             return this;
         }
 
-        public GlitchConfig UseHttps()
+        public GlitchConfig UseHttps(bool https)
         {
-            IsHttps = true;
+            IsHttps = https;
+            return this;
+        }
+
+        public GlitchConfig SendNotifications(bool notify)
+        {
+            Notify = notify;
             return this;
         }
 
@@ -36,7 +43,15 @@ namespace Glitch.Notifier
 
         public bool IsHttps { get; private set; }
 
+        private bool _notify = true;
+        public bool Notify
+        {
+            get { return _notify; }
+            private set { _notify = value; }
+        }
+
         private string _errorProfile = "v1.net.default";
+
         public string ErrorProfile
         {
             get { return _errorProfile; }

@@ -72,12 +72,19 @@ namespace Glitch.Notifier
 
         public void Send()
         {
+            if (!Glitch.Config.Notify) return;
             ApplyDefaultsIfNeeded();
             NotificationSender.Send(this);
         }
 
         public Task SendAsync()
         {
+            if(!Glitch.Config.Notify)
+            {
+                var ts = new TaskCompletionSource<bool>();
+                ts.SetResult(true);
+                return ts.Task;
+            }
             ApplyDefaultsIfNeeded();
             return NotificationSender.SendAsync(this);
         }

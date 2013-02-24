@@ -9,7 +9,11 @@
   
   <!--
   Glitch.io configuration. Get your apiKey at http://glith.io
-  You can choose if the glitch notifier will use HTTPS when sending the messages to glitch.io
+  - You can choose if the glitch notifier will use HTTPS when sending the messages to glitch.io
+  - Set notify=false if you don't want to send the error notifications to glitch 
+    (i.e.: while developing the app)
   -->
-  <glitch apiKey="Put your apiKey here" useHttps="false"/>
+  <glitch notify="true" 
+          apiKey="Put your apiKey here" 
+          useHttps="false"/>
 </configuration>

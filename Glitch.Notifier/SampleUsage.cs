@@ -10,7 +10,7 @@ namespace Glitch.Notifier
         public void Test()
         {
             Glitch.Config.UseApiKey("234234324")
-                .UseHttps()
+                .UseHttps(true)
                 .UseDefaultErrorProfile("my-profile");
 
             Glitch.Notify("error")

@@ -33,5 +33,18 @@ namespace Glitch.Notifier
                 this["useHttps"] = value;
             }
         }
+
+        [ConfigurationProperty("notify", DefaultValue = "true")]
+        public bool Notify
+        {
+            get
+            {
+                return (bool)this["notify"];
+            }
+            set
+            {
+                this["notify"] = value;
+            }
+        }
     }
 }
