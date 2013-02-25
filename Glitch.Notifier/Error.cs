@@ -64,7 +64,7 @@ namespace Glitch.Notifier
         public Error With(string key, object value)
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentException("key cannot be null or empty");
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) return this;
 
             ExtraData[key] = value;
             return this;

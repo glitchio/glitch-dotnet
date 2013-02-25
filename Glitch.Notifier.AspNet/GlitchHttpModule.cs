@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Web;
 
 namespace Glitch.Notifier.AspNet
 {
-    public class GlitchHttpModule:IHttpModule
+    public class GlitchHttpModule : IHttpModule
     {
         public GlitchHttpModule()
         {
@@ -18,18 +19,25 @@ namespace Glitch.Notifier.AspNet
 
         void ContextError(object sender, EventArgs e)
         {
+            if (HttpContext.Current.Items.Contains("Glitch.ErrorHandled")) return;
+
             var exception = HttpContext.Current.Server.GetLastError();
 
-            Glitch.Factory.HttpContextError(exception, HttpContext.Current, ErrorProfile)
-                  .WithContextData()
-                  .Send();
-
-            HttpContext.Current.Server.ClearError();
+            try
+            {
+                Glitch.Factory.HttpContextError(exception, HttpContext.Current, ErrorProfile)
+                      .WithContextData()
+                      .Send();
+            }
+            catch (Exception ex)
+            {
+                Trace.Write(ex.ToString());
+            }
         }
 
         public void Dispose()
         {
-          
+
         }
     }
 }

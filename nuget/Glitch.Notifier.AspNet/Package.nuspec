@@ -9,7 +9,7 @@
     <projectUrl>https://github.com/glitchio/glitch-dotnet</projectUrl>
     <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Glitch.io .NET core notifier</description>
+    <description>Glitch.io ASP.NET notifier</description>
     <releaseNotes>Initial version.</releaseNotes>
     <copyright>Copyright Glitch.io 2013</copyright>
     <tags>Glitch.io error logging unhandled exception web asp.net webapi mvc</tags>

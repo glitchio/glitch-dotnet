@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Filters;
 
@@ -17,11 +18,22 @@ namespace Glitch.Notifier.AspNet.Http
         {
             get { return true; }
         }
+
         public Task ExecuteExceptionFilterAsync(HttpActionExecutedContext actionExecutedContext, CancellationToken cancellationToken)
         {
-            return Glitch.Factory.WebApiError(actionExecutedContext, ErrorProfile)
+            var completionSource = new TaskCompletionSource<bool>();
+            Glitch.Factory.WebApiError(actionExecutedContext, ErrorProfile)
                 .WithContextData()
-                .SendAsync();
+                .SendAsync()
+                .ContinueWith(t =>
+                                  {
+                                      if (t.IsFaulted && t.Exception != null)
+                                      {
+                                          Trace.Write(t.Exception.ToString());
+                                      }
+                                      completionSource.SetResult(true);
+                                  });
+            return completionSource.Task;
         }
     }
 }

@@ -55,7 +55,7 @@ namespace Glitch.Notifier
                     .ContinueWith(task2 =>
                     {
                         if (HasError(task2, taskCompletionSource)) return;
-                       
+
                         WebResponse webResponse = null;
                         try
                         {
@@ -63,7 +63,7 @@ namespace Glitch.Notifier
                             webResponse = task2.Result;
                             taskCompletionSource.SetResult(true);
                         }
-                        catch(WebException ex)
+                        catch (WebException ex)
                         {
                             taskCompletionSource.SetException(ex.WrapException());
                         }
@@ -79,6 +79,7 @@ namespace Glitch.Notifier
 
         private static bool HasError(Task task, TaskCompletionSource<bool> taskCompletionSource)
         {
+            if (taskCompletionSource.Task.IsCompleted && taskCompletionSource.Task.IsFaulted) return true;
             if (task.IsFaulted && task.Exception != null)
             {
                 taskCompletionSource.SetException(task.Exception);
