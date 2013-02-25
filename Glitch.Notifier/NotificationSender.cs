@@ -102,6 +102,7 @@ namespace Glitch.Notifier
         {
             var request = HttpWebRequest.Create(Glitch.Config.Url);
             request.SetApiKey();
+            request.HandleProxySettings();
             request.Method = "POST";
             request.ContentType = "application/json";
             return request;
