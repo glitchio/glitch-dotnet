@@ -27,13 +27,13 @@ namespace Glitch.Notifier
         }
 
 
-        internal Dictionary<string, object> ExtraData { get; set; }
-        internal string ErrorMessage { get; set; }
-        internal string Profile { get; set; }
-        internal string GroupKey { get; set; }
-        internal DateTime OccurredAt { get; set; }
-        internal string User { get; set; }
-        internal string Location { get; set; }
+        public Dictionary<string, object> ExtraData { get; internal set; }
+        public string ErrorMessage { get; internal set; }
+        public string Profile { get; internal set; }
+        public string GroupKey { get; internal set; }
+        public DateTime OccurredAt { get; internal set; }
+        public string User { get; internal set; }
+        public string Location { get; internal set; }
 
         public Error WithErrorProfile(string profile)
         {

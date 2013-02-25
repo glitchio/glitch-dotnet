@@ -13,13 +13,5 @@ namespace Glitch.Notifier
                 throw new ConfigurationErrorsException("apiKey must be configured");
             request.Headers.Add(HttpRequestHeader.Authorization, "key " + apiKey);
         }
-
-        public static void HandleProxySettings(this WebRequest request)
-        {
-            if (request.Proxy != null && request.Proxy.Credentials == null)
-            {
-                request.Proxy.Credentials = CredentialCache.DefaultCredentials;
-            }
-        }
     }
 }
