@@ -50,7 +50,7 @@ namespace Glitch.Notifier
             private set { _notify = value; }
         }
 
-        private string _errorProfile = "v1.net.default";
+        private string _errorProfile = "glitch/v1.net.default";
 
         public string ErrorProfile
         {
