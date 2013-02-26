@@ -55,6 +55,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CoreSpecifications\ErrorSpecifications\When_sending_an_error_notification.cs" />
+    <Compile Include="CoreSpecifications\GlitchConfigSpecifications.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
