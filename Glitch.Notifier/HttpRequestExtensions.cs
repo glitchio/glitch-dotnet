@@ -6,9 +6,8 @@ namespace Glitch.Notifier
 {
     internal static class HttpRequestExtensions
     {
-        public static void SetApiKey(this WebRequest request)
+        public static void SetApiKey(this WebRequest request, string apiKey)
         {
-            var apiKey = Glitch.Config.ApiKey;
             if (String.IsNullOrWhiteSpace(apiKey))
                 throw new ConfigurationErrorsException("apiKey must be configured");
             request.Headers.Add(HttpRequestHeader.Authorization, "key " + apiKey);

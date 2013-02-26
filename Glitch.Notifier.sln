@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glitch.Notifier", "Glitch.N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glitch.Notifier.AspNet", "Glitch.Notifier.AspNet\Glitch.Notifier.AspNet.csproj", "{66611FEB-FFFA-4FB7-A855-E603797132FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glitch.Notifier.Tests", "Glitch.Notifier.Tests\Glitch.Notifier.Tests.csproj", "{090648E4-3E42-41B6-B5E6-163752FDC8C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{66611FEB-FFFA-4FB7-A855-E603797132FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66611FEB-FFFA-4FB7-A855-E603797132FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66611FEB-FFFA-4FB7-A855-E603797132FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{090648E4-3E42-41B6-B5E6-163752FDC8C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{090648E4-3E42-41B6-B5E6-163752FDC8C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{090648E4-3E42-41B6-B5E6-163752FDC8C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{090648E4-3E42-41B6-B5E6-163752FDC8C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

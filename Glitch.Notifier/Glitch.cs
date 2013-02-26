@@ -11,7 +11,6 @@ using Newtonsoft.Json.Serialization;
 
 namespace Glitch.Notifier
 {
-    //Static or instance? 
     public static class Glitch
     {
         public static readonly GlitchConfig Config;
@@ -22,16 +21,5 @@ namespace Glitch.Notifier
         {
             Config = new GlitchConfig(ConfigurationManager.GetSection("glitch") as GlitchConfigSection);
         }
-
-        public static Error Notify(string errorMessage)
-        {
-            return new Error(errorMessage);
-        }
-
-        public static Error Notify(Exception exception)
-        {
-            return new Error(exception);
-        }
-
     }
 }

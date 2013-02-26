@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Threading.Tasks;
+using Glitch.Notifier.Notifications;
+using Newtonsoft.Json;
 
 namespace Glitch.Notifier
 {
     public class Error
     {
-        private readonly Exception _exception;
-
         public Error(string errorMessage)
         {
             if (string.IsNullOrWhiteSpace(errorMessage)) throw new ArgumentException("errorMessage cannot be null or empty");
@@ -21,12 +22,14 @@ namespace Glitch.Notifier
             : this(exception.Message)
         {
             if (exception == null) throw new ArgumentNullException("exception");
-            _exception = exception;
+            Exception = exception;
             //Get only the stacktrace instead? What if there are inner exceptions?
             ExtraData["StackTrace"] = exception.ToString();
         }
 
-
+        [JsonIgnore]
+        public Exception Exception { get; private set; }
+        
         public Dictionary<string, object> ExtraData { get; internal set; }
         public string ErrorMessage { get; internal set; }
         public string Profile { get; internal set; }
@@ -73,8 +76,9 @@ namespace Glitch.Notifier
         public void Send()
         {
             if (!Glitch.Config.Notify) return;
+            CheckApiKey();
             ApplyDefaultsIfNeeded();
-            NotificationSender.Send(this);
+            NotificationSenderFactory.Create(Glitch.Config.Url, Glitch.Config.ApiKey).Send(this);
         }
 
         public Task SendAsync()
@@ -85,14 +89,21 @@ namespace Glitch.Notifier
                 ts.SetResult(true);
                 return ts.Task;
             }
+            CheckApiKey();
             ApplyDefaultsIfNeeded();
-            return NotificationSender.SendAsync(this);
+            return NotificationSenderFactory.Create(Glitch.Config.Url, Glitch.Config.ApiKey).SendAsync(this);
         }
 
         private void ApplyDefaultsIfNeeded()
         {
             ApplyGroupKeyDefaultIfNeeded();
             ApplyErrorProfileDefaultIfNeeded();
+        }
+
+        private static void CheckApiKey()
+        {
+            if (String.IsNullOrWhiteSpace(Glitch.Config.ApiKey))
+                throw new ConfigurationErrorsException("apiKey must be configured");
         }
 
         private void ApplyErrorProfileDefaultIfNeeded()
@@ -110,13 +121,13 @@ namespace Glitch.Notifier
             {
                 string hashSeed;
                 //If an exception was provided, we have more info to create a groupKey
-                if (_exception != null)
+                if (Exception != null)
                 {
                     //For the hash, only the error message and the first line of the stacktrace 
                     //are considered.
                     hashSeed = string.Format("{0}|{1}",
-                                             _exception.Message,
-                                             _exception.GetStackTraceFirstLine());
+                                             Exception.Message,
+                                             Exception.GetStackTraceFirstLine());
                 }
                 else
                 {

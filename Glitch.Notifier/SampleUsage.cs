@@ -13,7 +13,7 @@ namespace Glitch.Notifier
                 .UseHttps(true)
                 .UseDefaultErrorProfile("my-profile");
 
-            Glitch.Notify("error")
+            Glitch.Factory.Error("error")
                   .WithErrorProfile("my-other-profile")
                   .With("controller", "AccountController")
                   .Send();

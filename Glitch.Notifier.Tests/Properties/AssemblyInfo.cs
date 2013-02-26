@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Glitch.Notifier")]
+[assembly: AssemblyTitle("Glitch.Notifier.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Glitch.io")]
-[assembly: AssemblyProduct("Glitch.Notifier")]
+[assembly: AssemblyProduct("Glitch.Notifier.Tests")]
 [assembly: AssemblyCopyright("Copyright © Glitch.io 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ae346c04-b2ff-490a-8c2d-ad3e9a693169")]
+[assembly: Guid("ad3138c5-85e5-476e-b6d6-c2e019f872de")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,7 +32,6 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.1.0.0")]
-[assembly: AssemblyFileVersion("0.1.0.0")]
-[assembly: InternalsVisibleTo("Glitch.Notifier.Tests")]
-[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
+

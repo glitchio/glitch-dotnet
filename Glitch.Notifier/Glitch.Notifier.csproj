@@ -52,7 +52,9 @@
     <Compile Include="GlitchConfigSection.cs" />
     <Compile Include="GlitchErrorFactory.cs" />
     <Compile Include="HttpRequestExtensions.cs" />
-    <Compile Include="NotificationSender.cs" />
+    <Compile Include="Notifications\INotificationSender.cs" />
+    <Compile Include="Notifications\NotificationSender.cs" />
+    <Compile Include="Notifications\NotificationSenderFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleUsage.cs" />
   </ItemGroup>
