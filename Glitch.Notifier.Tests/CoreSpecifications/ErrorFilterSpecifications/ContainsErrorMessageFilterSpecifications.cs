@@ -19,7 +19,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorFilterSpecifications
         }
 
         [TestMethod]
-        public void Given_regex_does_not_match_Should_not_exclude_error()
+        public void Given_message_not_match_Should_not_exclude_error()
         {
             //Arrange
             var error = new Error("test");
@@ -32,7 +32,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorFilterSpecifications
         }
 
         [TestMethod]
-        public void Given_regex_does_match_Should_exclude_error()
+        public void Given_message_does_match_Should_exclude_error()
         {
             //Arrange
             var error = new Error("test");

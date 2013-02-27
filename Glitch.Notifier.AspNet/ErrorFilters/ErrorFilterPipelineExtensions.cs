@@ -14,5 +14,11 @@ namespace Glitch.Notifier.AspNet.ErrorFilters
             pipeline.WithFilter(new HttpCodeErrorFilter(statusCode));
             return pipeline;
         }
+
+        public static ErrorFilterPipeline WithUrlFragment(this ErrorFilterPipeline pipeline, string urlFragment)
+        {
+            pipeline.WithFilter(new ContainsUrlFragmentErrorFilter(urlFragment));
+            return pipeline;
+        }
     }
 }
