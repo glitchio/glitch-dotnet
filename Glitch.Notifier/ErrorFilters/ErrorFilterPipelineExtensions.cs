@@ -24,5 +24,11 @@ namespace Glitch.Notifier.ErrorFilters
             pipeline.WithFilter(new ExceptionTypeErrorFilter(type));
             return pipeline;
         }
+
+        public static ErrorFilterPipeline Where(this ErrorFilterPipeline pipeline, Func<Error, bool> expression)
+        {
+            pipeline.WithFilter(new ExpressionErrorFilter(expression));
+            return pipeline;
+        }
     }
 }

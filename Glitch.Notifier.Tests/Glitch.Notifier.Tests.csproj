@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="AspNetSpecifications\ErrorFilterSpecifications\ContainsErrorMessageFilterSpecifications.cs" />
     <Compile Include="CoreSpecifications\ErrorFilterSpecifications\ContainsErrorMessageFilterSpecifications.cs" />
+    <Compile Include="CoreSpecifications\ErrorFilterSpecifications\ExpressionErrorFilterSpecifications.cs" />
     <Compile Include="CoreSpecifications\ErrorFilterSpecifications\ErrorFilterPipelineSpecifications.cs" />
     <Compile Include="CoreSpecifications\ErrorFilterSpecifications\ExceptionTypeErrorFilterSpecifications.cs" />
     <Compile Include="CoreSpecifications\ErrorFilterSpecifications\RegexErrorMessageFilterSpecifications.cs" />

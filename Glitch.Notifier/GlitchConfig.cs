@@ -73,10 +73,10 @@ namespace Glitch.Notifier
             get { return IsHttps ? "https" : "http"; }
         }
 
-        private readonly ErrorFilterPipeline _errorFilters = new ErrorFilterPipeline();
-        public ErrorFilterPipeline ErrorFilters
+        private readonly ErrorFilterPipeline _ignoreErrors = new ErrorFilterPipeline();
+        public ErrorFilterPipeline IgnoreErrors
         {
-            get { return _errorFilters; }
+            get { return _ignoreErrors; }
         }
     }
 }
