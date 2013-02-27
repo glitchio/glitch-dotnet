@@ -13,13 +13,13 @@ using Moq;
 namespace Glitch.Notifier.Tests.AspNetSpecifications.ErrorFilterSpecifications
 {
     [TestClass]
-    public class ContainsUrlFragmentFilterSpecifications : ErrorFilterSpecificationBase
+    public class RegexUrlFilterSpecifications: ErrorFilterSpecificationBase
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Given_contains_url_fragment_is_null_Should_throw_an_exception()
         {
-            new ContainsUrlFragmentErrorFilter(null);
+            new RegexUrlErrorFilter(null);
         }
 
         [TestMethod]
@@ -29,7 +29,7 @@ namespace Glitch.Notifier.Tests.AspNetSpecifications.ErrorFilterSpecifications
             var error = new Error("test");
 
             //Act
-            var exclude = new ContainsUrlFragmentErrorFilter("a").Exclude(error);
+            var exclude = new RegexUrlErrorFilter("a").Exclude(error);
 
             //Assert
             Assert.IsFalse(exclude);
@@ -39,13 +39,13 @@ namespace Glitch.Notifier.Tests.AspNetSpecifications.ErrorFilterSpecifications
         public void Given_url_fragment_does_not_match_Should_not_exclude_error()
         {
             //Arrange
-            HttpRequest.Setup(r => r.Url).Returns(new Uri("http://test/a/b"));
+            HttpRequest.Setup(r => r.Url).Returns(new Uri("http://test/a/b/3"));
             var wrapper =
                 Glitch.Factory.HttpContextError(new ArgumentException(), HttpContext.Object)
                 .WithUrl();
 
             //Act
-            var exclude = new ContainsUrlFragmentErrorFilter("c").Exclude(wrapper.Error);
+            var exclude = new RegexUrlErrorFilter("c").Exclude(wrapper.Error);
 
             //Assert
             Assert.IsFalse(exclude);
@@ -54,13 +54,13 @@ namespace Glitch.Notifier.Tests.AspNetSpecifications.ErrorFilterSpecifications
         [TestMethod]
         public void Given_url_fragment_does_match_Should_exclude_error()
         {
-            HttpRequest.Setup(r => r.Url).Returns(new Uri("http://test/a/b"));
+            HttpRequest.Setup(r => r.Url).Returns(new Uri("http://test/a/b?Id=5"));
             var wrapper =
                 Glitch.Factory.HttpContextError(new ArgumentException(), HttpContext.Object)
                 .WithUrl();
 
             //Act
-            var exclude = new ContainsUrlFragmentErrorFilter("a").Exclude(wrapper.Error);
+            var exclude = new RegexUrlErrorFilter("a/b\\?Id=\\d+").Exclude(wrapper.Error);
 
             //Assert
             Assert.IsTrue(exclude);

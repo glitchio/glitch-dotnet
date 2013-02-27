@@ -20,5 +20,11 @@ namespace Glitch.Notifier.AspNet.ErrorFilters
             pipeline.WithFilter(new ContainsUrlFragmentErrorFilter(urlFragment));
             return pipeline;
         }
+
+        public static ErrorFilterPipeline WithRegexUrl(this ErrorFilterPipeline pipeline, string expression)
+        {
+            pipeline.WithFilter(new RegexUrlErrorFilter(expression));
+            return pipeline;
+        }
     }
 }
