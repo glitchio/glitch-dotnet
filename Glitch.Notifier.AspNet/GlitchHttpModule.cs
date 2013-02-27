@@ -26,7 +26,7 @@ namespace Glitch.Notifier.AspNet
 
             try
             {
-                Glitch.Factory.HttpContextError(exception.InnerException, HttpContext.Current, ErrorProfile)
+                Glitch.Factory.HttpContextError(exception.InnerException, ErrorProfile)
                       .WithContextData()
                       .Send();
             }

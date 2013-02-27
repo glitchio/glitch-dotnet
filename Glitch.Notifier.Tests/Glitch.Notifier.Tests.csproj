@@ -40,6 +40,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -54,6 +55,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AspNetSpecifications\ErrorFilterSpecifications\ContainsErrorMessageFilterSpecifications.cs" />
+    <Compile Include="CoreSpecifications\ErrorFilterSpecifications\ContainsErrorMessageFilterSpecifications.cs" />
+    <Compile Include="CoreSpecifications\ErrorFilterSpecifications\ErrorFilterPipelineSpecifications.cs" />
+    <Compile Include="CoreSpecifications\ErrorFilterSpecifications\ExceptionTypeErrorFilterSpecifications.cs" />
+    <Compile Include="CoreSpecifications\ErrorFilterSpecifications\RegexErrorMessageFilterSpecifications.cs" />
     <Compile Include="CoreSpecifications\ErrorSpecifications\When_sending_an_error_notification.cs" />
     <Compile Include="CoreSpecifications\GlitchConfigSpecifications.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,6 +77,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

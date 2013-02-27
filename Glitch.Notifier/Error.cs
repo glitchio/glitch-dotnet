@@ -14,8 +14,7 @@ namespace Glitch.Notifier
             if (string.IsNullOrWhiteSpace(errorMessage)) throw new ArgumentException("errorMessage cannot be null or empty");
             ExtraData = new Dictionary<string, object>();
             ErrorMessage = errorMessage;
-            //Use UTC or local time?
-            OccurredAt = DateTime.Now;
+            OccurredAt = DateTime.UtcNow;
         }
 
         public Error(Exception exception)

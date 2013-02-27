@@ -28,7 +28,7 @@ namespace Glitch.Notifier.AspNet
                     .WithQueryString()
                     .WithServerInfo()
                     .WithClientInfo()
-                    .WithStatusCode();
+                    .WithHttpStatusCode();
         }
 
         public static T WithHttpHeaders<T>(this T wrapper) where T:HttpError
@@ -43,7 +43,7 @@ namespace Glitch.Notifier.AspNet
             return wrapper;
         }
 
-        public static T WithStatusCode<T>(this T wrapper) where T : HttpError
+        public static T WithHttpStatusCode<T>(this T wrapper) where T : HttpError
         {
             wrapper.Error.With("HttpStatusCode", wrapper.HttpContext.GetStatusCode());
             return wrapper;

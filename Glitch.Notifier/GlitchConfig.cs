@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Glitch.Notifier.ErrorFilters;
 
 namespace Glitch.Notifier
 {
@@ -51,6 +52,7 @@ namespace Glitch.Notifier
         }
 
         private string _errorProfile = "glitch/v1.net.default";
+       
 
         public string ErrorProfile
         {
@@ -69,6 +71,12 @@ namespace Glitch.Notifier
         private string Scheme
         {
             get { return IsHttps ? "https" : "http"; }
+        }
+
+        private readonly ErrorFilterPipeline _errorFilters = new ErrorFilterPipeline();
+        public ErrorFilterPipeline ErrorFilters
+        {
+            get { return _errorFilters; }
         }
     }
 }

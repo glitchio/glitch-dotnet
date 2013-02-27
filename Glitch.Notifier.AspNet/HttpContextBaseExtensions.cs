@@ -11,6 +11,7 @@ namespace Glitch.Notifier.AspNet
     {
         public static string GetUrl(this HttpContextBase context)
         {
+            if (context.Request == null || context.Request.Url == null) return null;
             return context.Request.Url.ToString();
         }
 

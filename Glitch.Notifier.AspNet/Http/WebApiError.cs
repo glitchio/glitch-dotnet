@@ -25,7 +25,7 @@ namespace Glitch.Notifier.AspNet.Http
                 .WithAction()
                 .WithQueryString()
                 .WithCurrentUser()
-                .WithStatusCode();
+                .WithHttpStatusCode();
         }
 
         public WebApiError WithHttpHeaders()
@@ -46,7 +46,7 @@ namespace Glitch.Notifier.AspNet.Http
             return this;
         }
 
-        public WebApiError WithStatusCode()
+        public WebApiError WithHttpStatusCode()
         {
             Error.With("HttpStatusCode", _context.Response.StatusCode);
             return this;
