@@ -78,5 +78,7 @@ namespace Glitch.Notifier
         {
             get { return _ignoreErrors; }
         }
+
+        //private readonly ErrorContentFilter _ig
     }
 }

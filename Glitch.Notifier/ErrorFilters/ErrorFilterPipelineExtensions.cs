@@ -7,21 +7,21 @@ namespace Glitch.Notifier.ErrorFilters
 {
     public static class ErrorFilterPipelineExtensions
     {
-        public static ErrorFilterPipeline WithContainsErrorMessageFilter(this ErrorFilterPipeline pipeline, string containsMessage)
+        public static ErrorFilterPipeline WithErrorMessageContaining(this ErrorFilterPipeline pipeline, string containsMessage)
         {
             pipeline.WithFilter(new ContainsErrorMessageFilter(containsMessage));
             return pipeline;
         }
 
-        public static ErrorFilterPipeline WithRegexErrorMessageFilter(this ErrorFilterPipeline pipeline, string expression)
+        public static ErrorFilterPipeline WithErrorMessageMatching(this ErrorFilterPipeline pipeline, string expression)
         {
             pipeline.WithFilter(new RegexErrorMessageFilter(expression));
             return pipeline;
         }
 
-        public static ErrorFilterPipeline WithExceptionType(this ErrorFilterPipeline pipeline, Type type)
+        public static ErrorFilterPipeline WithExceptionTypes(this ErrorFilterPipeline pipeline, Type type)
         {
-            pipeline.WithFilter(new ExceptionTypeErrorFilter(type));
+            pipeline.WithFilter(new ExceptionTypesErrorFilter(type));
             return pipeline;
         }
 

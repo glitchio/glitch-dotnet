@@ -47,7 +47,7 @@
     <Compile Include="ErrorFilters\ContainsErrorMessageFilter.cs" />
     <Compile Include="ErrorFilters\ErrorFilterPipelineExtensions.cs" />
     <Compile Include="ErrorFilters\ErrorFilterPipeline.cs" />
-    <Compile Include="ErrorFilters\ExceptionTypeErrorFilter.cs" />
+    <Compile Include="ErrorFilters\ExceptionTypesErrorFilter.cs" />
     <Compile Include="ErrorFilters\ExpressionErrorFilter.cs" />
     <Compile Include="ErrorFilters\IErrorFilter.cs" />
     <Compile Include="ErrorFilters\RegexErrorMessageFilter.cs" />

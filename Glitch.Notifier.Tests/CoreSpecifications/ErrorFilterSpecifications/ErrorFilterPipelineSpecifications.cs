@@ -26,8 +26,8 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorFilterSpecifications
         {
             var error = new Error(new ArgumentException("test"));
             var pipeline = new ErrorFilterPipeline();
-            pipeline.WithExceptionType(typeof(InvalidOperationException));
-            pipeline.WithContainsErrorMessageFilter("test");
+            pipeline.WithExceptionTypes(typeof(InvalidOperationException));
+            pipeline.WithErrorMessageContaining("test");
 
             var exclude = pipeline.Exclude(error);
 
@@ -39,8 +39,8 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorFilterSpecifications
         {
             var error = new Error(new ArgumentException());
             var pipeline = new ErrorFilterPipeline();
-            pipeline.WithExceptionType(typeof (InvalidOperationException));
-            pipeline.WithContainsErrorMessageFilter("test");
+            pipeline.WithExceptionTypes(typeof (InvalidOperationException));
+            pipeline.WithErrorMessageContaining("test");
 
             var exclude = pipeline.Exclude(error);
 

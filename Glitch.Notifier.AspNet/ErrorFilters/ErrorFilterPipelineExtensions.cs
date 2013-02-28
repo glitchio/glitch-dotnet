@@ -9,7 +9,7 @@ namespace Glitch.Notifier.AspNet.ErrorFilters
 {
     public static class ErrorFilterPipelineExtensions
     {
-        public static ErrorFilterPipeline WithHttpCodeFilter(this ErrorFilterPipeline pipeline, HttpStatusCode statusCode)
+        public static ErrorFilterPipeline WithHttpCode(this ErrorFilterPipeline pipeline, HttpStatusCode statusCode)
         {
             pipeline.WithFilter(new HttpCodeErrorFilter(statusCode));
             return pipeline;
@@ -21,7 +21,7 @@ namespace Glitch.Notifier.AspNet.ErrorFilters
             return pipeline;
         }
 
-        public static ErrorFilterPipeline WithRegexUrl(this ErrorFilterPipeline pipeline, string expression)
+        public static ErrorFilterPipeline WithUrlMatching(this ErrorFilterPipeline pipeline, string expression)
         {
             pipeline.WithFilter(new RegexUrlErrorFilter(expression));
             return pipeline;

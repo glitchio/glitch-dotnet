@@ -15,7 +15,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorFilterSpecifications
         [ExpectedException(typeof(ArgumentNullException))]
         public void Given_exception_type_is_null_Should_throw_an_exception()
         {
-            new ExceptionTypeErrorFilter(null);
+            new ExceptionTypesErrorFilter(null);
         }
 
         [TestMethod]
@@ -25,7 +25,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorFilterSpecifications
             var error = new Error("Error");
 
             //Act
-            var exclude = new ExceptionTypeErrorFilter(typeof(InvalidOperationException)).Exclude(error);
+            var exclude = new ExceptionTypesErrorFilter(typeof(InvalidOperationException)).Exclude(error);
 
             //Assert
             Assert.IsFalse(exclude);
@@ -38,7 +38,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorFilterSpecifications
             var error = new Error(new ArgumentException());
 
             //Act
-            var exclude = new ExceptionTypeErrorFilter(typeof(InvalidOperationException)).Exclude(error);
+            var exclude = new ExceptionTypesErrorFilter(typeof(InvalidOperationException)).Exclude(error);
 
             //Assert
             Assert.IsFalse(exclude);
@@ -51,7 +51,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorFilterSpecifications
             var error = new Error(new ArgumentException());
 
             //Act
-            var exclude = new ExceptionTypeErrorFilter(typeof(ArgumentException)).Exclude(error);
+            var exclude = new ExceptionTypesErrorFilter(typeof(ArgumentException)).Exclude(error);
 
             //Assert
             Assert.IsTrue(exclude);
