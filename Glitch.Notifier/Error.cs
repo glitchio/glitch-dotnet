@@ -9,6 +9,8 @@ namespace Glitch.Notifier
 {
     public class Error
     {
+        private Func<Error, string> _groupKeyFunc;
+
         public Error(string errorMessage)
         {
             if (string.IsNullOrWhiteSpace(errorMessage)) throw new ArgumentException("errorMessage cannot be null or empty");
@@ -28,11 +30,13 @@ namespace Glitch.Notifier
 
         [JsonIgnore]
         public Exception Exception { get; private set; }
-        
+
         public Dictionary<string, object> ExtraData { get; internal set; }
         public string ErrorMessage { get; internal set; }
         public string Profile { get; internal set; }
-        public string GroupKey { get; internal set; }
+
+
+        public string GroupKey { get; set; }
         public DateTime OccurredAt { get; internal set; }
         public string User { get; internal set; }
         public string Location { get; internal set; }
@@ -63,6 +67,13 @@ namespace Glitch.Notifier
             return this;
         }
 
+        public Error WithGroupKey(Func<Error, string> groupKeyFunc)
+        {
+            if (groupKeyFunc == null) throw new ArgumentNullException("groupKeyFunc");
+            _groupKeyFunc = groupKeyFunc;
+            return this;
+        }
+
         public Error With(string key, object value)
         {
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentException("key cannot be null or empty");
@@ -82,7 +93,7 @@ namespace Glitch.Notifier
 
         public Task SendAsync()
         {
-            if(!Glitch.Config.Notify)
+            if (!Glitch.Config.Notify)
             {
                 var ts = new TaskCompletionSource<bool>();
                 ts.SetResult(true);
@@ -115,6 +126,11 @@ namespace Glitch.Notifier
 
         private void ApplyGroupKeyDefaultIfNeeded()
         {
+            if (_groupKeyFunc != null)
+            {
+                GroupKey = _groupKeyFunc(this);
+            }
+
             //If groupKey is not specified then we do our own grouping. 
             if (string.IsNullOrWhiteSpace(GroupKey))
             {

@@ -86,5 +86,18 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorSpecifications
             Assert.IsFalse(string.IsNullOrWhiteSpace(error.GroupKey));
         }
 
+        [TestMethod]
+        public void Given_group_key_func_is_specified_Should_use_it_to_compute_the_group_key()
+        {
+            //arrange
+            Glitch.Config.UseApiKey("test").SendNotifications(true);
+
+            //act
+            var error = Glitch.Factory.Error("test").WithGroupKey(e => e.ErrorMessage);
+            error.Send();
+
+            //assert
+            Assert.AreEqual("test", error.GroupKey);
+        }
     }
 }
