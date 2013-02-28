@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Glitch.Notifier.ErrorFilters;
+using Glitch.Notifier.ErrorContentFilters;
 
 namespace Glitch.Notifier
 {
@@ -12,6 +14,10 @@ namespace Glitch.Notifier
             Glitch.Config.UseApiKey("234234324")
                 .UseHttps(true)
                 .UseDefaultErrorProfile("my-profile");
+
+            Glitch.Config.IgnoreErrors.WithErrorMessageContaining("test");
+
+            Glitch.Config.IgnoreContent.FromCookiesWithFieldsContaining("ASPAUX");
 
             Glitch.Factory.Error("error")
                   .WithErrorProfile("my-other-profile")

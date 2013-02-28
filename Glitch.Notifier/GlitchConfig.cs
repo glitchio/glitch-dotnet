@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Glitch.Notifier.ErrorContentFilters;
 using Glitch.Notifier.ErrorFilters;
 
 namespace Glitch.Notifier
@@ -73,12 +74,16 @@ namespace Glitch.Notifier
             get { return IsHttps ? "https" : "http"; }
         }
 
-        private readonly ErrorFilterPipeline _ignoreErrors = new ErrorFilterPipeline();
-        public ErrorFilterPipeline IgnoreErrors
+        private readonly ErrorFilter _ignoreErrors = new ErrorFilter();
+        public ErrorFilter IgnoreErrors
         {
             get { return _ignoreErrors; }
         }
 
-        //private readonly ErrorContentFilter _ig
+        private readonly ErrorContentFilter _ignoreContent = new ErrorContentFilter();
+        public ErrorContentFilter IgnoreContent
+        {
+            get { return _ignoreContent; }
+        }
     }
 }

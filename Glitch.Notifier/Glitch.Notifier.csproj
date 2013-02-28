@@ -44,9 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Error.cs" />
+    <Compile Include="ErrorContentFilters\ErrorContentFilter.cs" />
+    <Compile Include="ErrorContentFilters\ErrorContentFilterExtensions.cs" />
     <Compile Include="ErrorFilters\ContainsErrorMessageFilter.cs" />
-    <Compile Include="ErrorFilters\ErrorFilterPipelineExtensions.cs" />
-    <Compile Include="ErrorFilters\ErrorFilterPipeline.cs" />
+    <Compile Include="ErrorFilters\ErrorFilterExtensions.cs" />
+    <Compile Include="ErrorFilters\ErrorFilter.cs" />
     <Compile Include="ErrorFilters\ExceptionTypesErrorFilter.cs" />
     <Compile Include="ErrorFilters\ExpressionErrorFilter.cs" />
     <Compile Include="ErrorFilters\IErrorFilter.cs" />

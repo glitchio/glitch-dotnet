@@ -9,14 +9,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorFilterSpecifications
 {
     [TestClass]
-    public class ErrorFilterPipelineSpecifications
+    public class ErrorFilterSpecifications
     {
         [TestMethod]
         public void Given_there_are_no_filters_Should_not_exclude_it()
         {
             var error = new Error("test");
 
-            var exclude = new ErrorFilterPipeline().Exclude(error);
+            var exclude = new ErrorFilter().Exclude(error);
 
             Assert.IsFalse(exclude);
         }
@@ -25,7 +25,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorFilterSpecifications
         public void Given_at_least_one_filter_matches_Should_exclude_it()
         {
             var error = new Error(new ArgumentException("test"));
-            var pipeline = new ErrorFilterPipeline();
+            var pipeline = new ErrorFilter();
             pipeline.WithExceptionTypes(typeof(InvalidOperationException));
             pipeline.WithErrorMessageContaining("test");
 
@@ -38,7 +38,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorFilterSpecifications
         public void Given_there_are_no_filters_that_match_Should_not_exclude_it()
         {
             var error = new Error(new ArgumentException());
-            var pipeline = new ErrorFilterPipeline();
+            var pipeline = new ErrorFilter();
             pipeline.WithExceptionTypes(typeof (InvalidOperationException));
             pipeline.WithErrorMessageContaining("test");
 

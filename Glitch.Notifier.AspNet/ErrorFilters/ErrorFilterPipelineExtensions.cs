@@ -9,19 +9,19 @@ namespace Glitch.Notifier.AspNet.ErrorFilters
 {
     public static class ErrorFilterPipelineExtensions
     {
-        public static ErrorFilterPipeline WithHttpCode(this ErrorFilterPipeline pipeline, HttpStatusCode statusCode)
+        public static ErrorFilter WithHttpCode(this ErrorFilter pipeline, HttpStatusCode statusCode)
         {
             pipeline.WithFilter(new HttpCodeErrorFilter(statusCode));
             return pipeline;
         }
 
-        public static ErrorFilterPipeline WithUrlFragment(this ErrorFilterPipeline pipeline, string urlFragment)
+        public static ErrorFilter WithUrlFragment(this ErrorFilter pipeline, string urlFragment)
         {
             pipeline.WithFilter(new ContainsUrlFragmentErrorFilter(urlFragment));
             return pipeline;
         }
 
-        public static ErrorFilterPipeline WithUrlMatching(this ErrorFilterPipeline pipeline, string expression)
+        public static ErrorFilter WithUrlMatching(this ErrorFilter pipeline, string expression)
         {
             pipeline.WithFilter(new RegexUrlErrorFilter(expression));
             return pipeline;

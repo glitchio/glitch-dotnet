@@ -6,11 +6,11 @@ using System.Text;
 
 namespace Glitch.Notifier.ErrorFilters
 {
-    public class ErrorFilterPipeline:IErrorFilter
+    public class ErrorFilter:IErrorFilter
     {
         private readonly List<IErrorFilter> _filters = new List<IErrorFilter>();
 
-        public ErrorFilterPipeline WithFilter(IErrorFilter filter)
+        public ErrorFilter WithFilter(IErrorFilter filter)
         {
             if (filter == null) throw new ArgumentNullException("filter");
             _filters.Add(filter);

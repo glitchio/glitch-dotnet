@@ -5,27 +5,27 @@ using System.Text;
 
 namespace Glitch.Notifier.ErrorFilters
 {
-    public static class ErrorFilterPipelineExtensions
+    public static class ErrorFilterExtensions
     {
-        public static ErrorFilterPipeline WithErrorMessageContaining(this ErrorFilterPipeline pipeline, string containsMessage)
+        public static ErrorFilter WithErrorMessageContaining(this ErrorFilter pipeline, string containsMessage)
         {
             pipeline.WithFilter(new ContainsErrorMessageFilter(containsMessage));
             return pipeline;
         }
 
-        public static ErrorFilterPipeline WithErrorMessageMatching(this ErrorFilterPipeline pipeline, string expression)
+        public static ErrorFilter WithErrorMessageMatching(this ErrorFilter pipeline, string expression)
         {
             pipeline.WithFilter(new RegexErrorMessageFilter(expression));
             return pipeline;
         }
 
-        public static ErrorFilterPipeline WithExceptionTypes(this ErrorFilterPipeline pipeline, Type type)
+        public static ErrorFilter WithExceptionTypes(this ErrorFilter pipeline, Type type)
         {
             pipeline.WithFilter(new ExceptionTypesErrorFilter(type));
             return pipeline;
         }
 
-        public static ErrorFilterPipeline Where(this ErrorFilterPipeline pipeline, Func<Error, bool> expression)
+        public static ErrorFilter Where(this ErrorFilter pipeline, Func<Error, bool> expression)
         {
             pipeline.WithFilter(new ExpressionErrorFilter(expression));
             return pipeline;
