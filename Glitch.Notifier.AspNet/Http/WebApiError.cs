@@ -21,28 +21,16 @@ namespace Glitch.Notifier.AspNet.Http
             return WithHttpHeaders()
                 .WithHttpMethod()
                 .WithUrl()
-                .WithController()
-                .WithAction()
+                .WithRouteData()
                 .WithQueryString()
                 .WithCurrentUser()
-                .WithHttpStatusCode();
+                .WithHttpStatusCode()
+                .WithCookies();
         }
 
         public WebApiError WithHttpHeaders()
         {
             Error.With("HttpHeaders", _context.Request.Headers.ToDictionary(h => h.Key, h => h.Value));
-            return this;
-        }
-
-        public WebApiError WithController()
-        {
-            Error.With("Controller", GetController());
-            return this;
-        }
-
-        public WebApiError WithAction()
-        {
-            Error.With("Action", GetAction());
             return this;
         }
 
@@ -61,6 +49,13 @@ namespace Glitch.Notifier.AspNet.Http
         public WebApiError WithHttpMethod()
         {
             Error.With("HttpMethod", _context.ActionContext.Request.Method.Method);
+            return this;
+        }
+
+        public WebApiError WithCookies()
+        {
+            if (HttpContext.Current == null) return this;
+            Error.With("Cookies", new HttpContextWrapper(HttpContext.Current).GetCookies());
             return this;
         }
 
@@ -97,6 +92,12 @@ namespace Glitch.Notifier.AspNet.Http
         public WebApiError WithErrorProfile(string errorProfile)
         {
             Error.WithErrorProfile(errorProfile);
+            return this;
+        }
+
+        public WebApiError WithRouteData()
+        {
+            Error.With("RouteData", _context.ActionContext.ControllerContext.RouteData.Values);
             return this;
         }
 

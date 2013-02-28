@@ -28,7 +28,11 @@ namespace Glitch.Notifier.AspNet
                     .WithQueryString()
                     .WithServerInfo()
                     .WithClientInfo()
-                    .WithHttpStatusCode();
+                    .WithHttpStatusCode()
+                    .WithCookies()
+                    .WithFormVariables()
+                    .WithServerVariables()
+                    .WithUrlReferer();
         }
 
         public static T WithHttpHeaders<T>(this T wrapper) where T:HttpError
@@ -84,5 +88,30 @@ namespace Glitch.Notifier.AspNet
             wrapper.Error.With("ClientInfo", wrapper.HttpContext.GetClientInfo());
             return wrapper;
         }
+
+        public static T WithFormVariables<T>(this T wrapper) where T:HttpError
+        {
+            wrapper.Error.With("Form", wrapper.HttpContext.GetFormVariables());
+            return wrapper;
+        }
+
+        public static T WithCookies<T>(this T wrapper) where T:HttpError
+        {
+            wrapper.Error.With("Cookies", wrapper.HttpContext.GetCookies());
+            return wrapper;
+        }
+
+        public static T WithServerVariables<T>(this T wrapper) where T:HttpError
+        {
+            wrapper.Error.With("ServerVariables", wrapper.HttpContext.GetServerVariables());
+            return wrapper;
+        }
+
+        public static T WithUrlReferer<T>(this T wrapper) where T:HttpError
+        {
+            wrapper.Error.With("UrlReferer", wrapper.HttpContext.GetUrlReferer());
+            return wrapper;
+        }
+
     }
 }

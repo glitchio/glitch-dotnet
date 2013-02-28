@@ -17,20 +17,13 @@ namespace Glitch.Notifier.AspNet.Mvc
         {
             return
                 HttpContextErrorExtensions.WithContextData(this)
-                    .WithController()
-                    .WithAction();
+                    .WithRouteData();
         }
 
 
-        public MvcError WithController()
+        public MvcError WithRouteData()
         {
-            Error.With("Controller", GetController());
-            return this;
-        }
-
-        public MvcError WithAction()
-        {
-            Error.With("Action", GetAction());
+            Error.With("RouteData", _exceptionContext.RouteData.Values);
             return this;
         }
 

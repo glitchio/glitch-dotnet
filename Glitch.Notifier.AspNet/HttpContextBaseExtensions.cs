@@ -60,11 +60,54 @@ namespace Glitch.Notifier.AspNet
                        };
         }
 
-        private static Dictionary<string, string> ToDictionary(NameValueCollection sourceHeaders)
+        public static Dictionary<string, string> GetFormVariables(this HttpContextBase context)
         {
-            return sourceHeaders.Cast<string>()
-                .Select(s => new { Key = s, Value = sourceHeaders[s] })
+            var source = context.Request.Form;
+            if (source.AllKeys.Any())
+            {
+                return ToDictionary(source);
+            }
+            return null;
+        }
+
+        public static Dictionary<string, string> GetServerVariables(this HttpContextBase context)
+        {
+            var source = context.Request.ServerVariables;
+            if (source.AllKeys.Any())
+            {
+                return ToDictionary(source);
+            }
+            return null;
+        }
+
+        public static Dictionary<string, string> GetCookies(this HttpContextBase context)
+        {
+            var source = context.Request.Cookies;
+            if (source.AllKeys.Any())
+            {
+                return ToDictionary(source);
+            }
+            return null;
+        }
+
+        public static string GetUrlReferer(this HttpContextBase context)
+        {
+            if (context.Request == null || context.Request.UrlReferrer == null)
+                return null;
+            return context.Request.UrlReferrer.ToString();
+        }
+
+        private static Dictionary<string, string> ToDictionary(NameValueCollection source)
+        {
+            return source.Cast<string>()
+                .Select(s => new { Key = s, Value = source[s] })
                 .ToDictionary(p => p.Key, p => p.Value);
+        }
+
+        private static Dictionary<string, string> ToDictionary(HttpCookieCollection cookies)
+        {
+            return cookies.Cast<HttpCookie>()
+                .ToDictionary(p => p.Name, p => p.Value);
         }
     }
 }
