@@ -61,6 +61,11 @@ namespace Glitch.Notifier.AspNet.Http
 
         public WebApiError WithCurrentUser()
         {
+            if(Glitch.Config.CurrentUserRetriever != null)
+            {
+                 Error.WithUser(Glitch.Config.CurrentUserRetriever());
+                return this;
+            }
             if (HttpContext.Current == null) return this;
             Error.WithUser(new HttpContextWrapper(HttpContext.Current).GetCurrentUser());
             return this;

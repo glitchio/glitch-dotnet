@@ -54,6 +54,14 @@ namespace Glitch.Notifier
             return this;
         }
 
+        public Func<string> CurrentUserRetriever { get; private set; }
+        public GlitchConfig WithCurrentUser(Func<string> currentUserFunc)
+        {
+            if (currentUserFunc == null) throw new ArgumentNullException("currentUserFunc");
+            CurrentUserRetriever = currentUserFunc;
+            return this;
+        }
+
         public string ApiKey { get; private set; }
 
         public bool IsHttps { get; private set; }

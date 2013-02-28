@@ -61,7 +61,10 @@ namespace Glitch.Notifier.AspNet
 
         public static T WithCurrentUser<T>(this T wrapper) where T : HttpError
         {
-            wrapper.Error.WithUser(wrapper.HttpContext.GetCurrentUser());
+            var user = Glitch.Config.CurrentUserRetriever != null 
+                              ? Glitch.Config.CurrentUserRetriever() 
+                              : wrapper.HttpContext.GetCurrentUser();
+            wrapper.Error.WithUser(user);
             return wrapper;
         }
 
