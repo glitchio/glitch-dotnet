@@ -41,6 +41,19 @@ namespace Glitch.Notifier
             return this;
         }
 
+        private Func<Error, string> _groupKeyGenerator = GroupKeyDefaultGenerator.Compute;
+        public Func<Error, string> GroupKeyGenerator
+        {
+            get { return _groupKeyGenerator; }
+        }
+
+        public GlitchConfig WithGroupKeyGenerator(Func<Error, string> groupKeyFunc)
+        {
+            if (groupKeyFunc == null) throw new ArgumentNullException("groupKeyFunc");
+            _groupKeyGenerator = groupKeyFunc;
+            return this;
+        }
+
         public string ApiKey { get; private set; }
 
         public bool IsHttps { get; private set; }
@@ -53,8 +66,6 @@ namespace Glitch.Notifier
         }
 
         private string _errorProfile = "glitch/v1.net.default";
-       
-
         public string ErrorProfile
         {
             get { return _errorProfile; }
@@ -81,9 +92,12 @@ namespace Glitch.Notifier
         }
 
         private readonly ErrorContentFilter _ignoreContent = new ErrorContentFilter();
+
         public ErrorContentFilter IgnoreContent
         {
             get { return _ignoreContent; }
         }
+
+        
     }
 }

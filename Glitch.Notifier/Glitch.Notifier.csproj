@@ -60,6 +60,7 @@
     <Compile Include="GlitchConfig.cs" />
     <Compile Include="GlitchConfigSection.cs" />
     <Compile Include="GlitchErrorFactory.cs" />
+    <Compile Include="GroupKeyDefaultGenerator.cs" />
     <Compile Include="HttpRequestExtensions.cs" />
     <Compile Include="Notifications\INotificationSender.cs" />
     <Compile Include="Notifications\NotificationSender.cs" />

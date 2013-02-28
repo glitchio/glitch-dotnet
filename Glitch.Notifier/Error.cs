@@ -9,8 +9,6 @@ namespace Glitch.Notifier
 {
     public class Error
     {
-        private Func<Error, string> _groupKeyFunc;
-
         public Error(string errorMessage)
         {
             if (string.IsNullOrWhiteSpace(errorMessage)) throw new ArgumentException("errorMessage cannot be null or empty");
@@ -67,12 +65,7 @@ namespace Glitch.Notifier
             return this;
         }
 
-        public Error WithGroupKey(Func<Error, string> groupKeyFunc)
-        {
-            if (groupKeyFunc == null) throw new ArgumentNullException("groupKeyFunc");
-            _groupKeyFunc = groupKeyFunc;
-            return this;
-        }
+        
 
         public Error With(string key, object value)
         {
@@ -126,30 +119,10 @@ namespace Glitch.Notifier
 
         private void ApplyGroupKeyDefaultIfNeeded()
         {
-            if (_groupKeyFunc != null)
-            {
-                GroupKey = _groupKeyFunc(this);
-            }
-
             //If groupKey is not specified then we do our own grouping. 
             if (string.IsNullOrWhiteSpace(GroupKey))
             {
-                string hashSeed;
-                //If an exception was provided, we have more info to create a groupKey
-                if (Exception != null)
-                {
-                    //For the hash, only the error message and the first line of the stacktrace 
-                    //are considered.
-                    hashSeed = string.Format("{0}|{1}",
-                                             Exception.Message,
-                                             Exception.GetStackTraceFirstLine());
-                }
-                else
-                {
-                    hashSeed = ErrorMessage;
-                }
-
-                GroupKey = Crypto.Hash(hashSeed);
+                GroupKey = Glitch.Config.GroupKeyGenerator(this);
             }
         }
     }

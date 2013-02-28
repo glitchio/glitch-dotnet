@@ -87,13 +87,14 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorSpecifications
         }
 
         [TestMethod]
-        public void Given_group_key_func_is_specified_Should_use_it_to_compute_the_group_key()
+        public void Given_group_key_generator_is_specified_Should_use_it_to_compute_the_group_key()
         {
             //arrange
-            Glitch.Config.UseApiKey("test").SendNotifications(true);
+            Glitch.Config.UseApiKey("test").SendNotifications(true)
+                    .WithGroupKeyGenerator(e => e.ErrorMessage);
 
             //act
-            var error = Glitch.Factory.Error("test").WithGroupKey(e => e.ErrorMessage);
+            var error = Glitch.Factory.Error("test");
             error.Send();
 
             //assert
