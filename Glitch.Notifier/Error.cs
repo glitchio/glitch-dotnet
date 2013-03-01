@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Threading.Tasks;
 using Glitch.Notifier.Notifications;
 using Newtonsoft.Json;
 
@@ -11,7 +10,7 @@ namespace Glitch.Notifier
     {
         public Error(string errorMessage)
         {
-            if (string.IsNullOrWhiteSpace(errorMessage)) throw new ArgumentException("errorMessage cannot be null or empty");
+            if (string.IsNullOrEmpty(errorMessage)) throw new ArgumentException("errorMessage cannot be null or empty");
             ExtraData = new Dictionary<string, object>();
             ErrorMessage = errorMessage;
             OccurredAt = DateTime.UtcNow;
@@ -41,7 +40,7 @@ namespace Glitch.Notifier
 
         public Error WithErrorProfile(string profile)
         {
-            if (string.IsNullOrWhiteSpace(profile)) throw new ArgumentException("profile cannot be null or empty");
+            if (string.IsNullOrEmpty(profile)) throw new ArgumentException("profile cannot be null or empty");
             Profile = profile;
             return this;
         }
@@ -60,16 +59,14 @@ namespace Glitch.Notifier
 
         public Error WithGroupKey(string groupKey)
         {
-            if (string.IsNullOrWhiteSpace(groupKey)) throw new ArgumentException("groupKey cannot be null or empty");
+            if (string.IsNullOrEmpty(groupKey)) throw new ArgumentException("groupKey cannot be null or empty");
             GroupKey = groupKey;
             return this;
         }
 
-        
-
         public Error With(string key, object value)
         {
-            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentException("key cannot be null or empty");
+            if (string.IsNullOrEmpty(key)) throw new ArgumentException("key cannot be null or empty");
             if (value == null) return this;
 
             ExtraData[key] = value;
@@ -84,19 +81,6 @@ namespace Glitch.Notifier
             NotificationSenderFactory.Create(Glitch.Config.Url, Glitch.Config.ApiKey).Send(this);
         }
 
-        public Task SendAsync()
-        {
-            if (!Glitch.Config.Notify)
-            {
-                var ts = new TaskCompletionSource<bool>();
-                ts.SetResult(true);
-                return ts.Task;
-            }
-            CheckApiKey();
-            ApplyDefaultsIfNeeded();
-            return NotificationSenderFactory.Create(Glitch.Config.Url, Glitch.Config.ApiKey).SendAsync(this);
-        }
-
         private void ApplyDefaultsIfNeeded()
         {
             ApplyGroupKeyDefaultIfNeeded();
@@ -105,13 +89,13 @@ namespace Glitch.Notifier
 
         private static void CheckApiKey()
         {
-            if (String.IsNullOrWhiteSpace(Glitch.Config.ApiKey))
+            if (String.IsNullOrEmpty(Glitch.Config.ApiKey))
                 throw new ConfigurationErrorsException("apiKey must be configured");
         }
 
         private void ApplyErrorProfileDefaultIfNeeded()
         {
-            if (string.IsNullOrWhiteSpace(Profile))
+            if (string.IsNullOrEmpty(Profile))
             {
                 Profile = Glitch.Config.ErrorProfile;
             }
@@ -120,7 +104,7 @@ namespace Glitch.Notifier
         private void ApplyGroupKeyDefaultIfNeeded()
         {
             //If groupKey is not specified then we do our own grouping. 
-            if (string.IsNullOrWhiteSpace(GroupKey))
+            if (string.IsNullOrEmpty(GroupKey))
             {
                 GroupKey = Glitch.Config.GroupKeyGenerator(this);
             }

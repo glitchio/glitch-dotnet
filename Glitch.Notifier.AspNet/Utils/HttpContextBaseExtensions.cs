@@ -5,9 +5,9 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Web;
 
-namespace Glitch.Notifier.AspNet
+namespace Glitch.Notifier.AspNet.Utils
 {
-    static class HttpContextBaseExtensions
+    public static class HttpContextBaseExtensions
     {
         public static string GetUrl(this HttpContextBase context)
         {

@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -37,64 +36,64 @@ namespace Glitch.Notifier.Notifications
             }
         }
 
-        //much easier with async/await !! but we're targeting .NET 4.0
-        public Task SendAsync(Error entity)
-        {
-            var request = CreateRequest();
-            var taskCompletionSource = new TaskCompletionSource<bool>();
+        ////much easier with async/await !! but we're targeting .NET 4.0
+        //public Task SendAsync(Error entity)
+        //{
+        //    var request = CreateRequest();
+        //    var taskCompletionSource = new TaskCompletionSource<bool>();
 
-            Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream,
-              request.EndGetRequestStream, null, TaskCreationOptions.None)
-              .ContinueWith(task =>
-              {
-                  if (HasError(task, taskCompletionSource)) return;
+        //    Task.Factory.FromAsync<Stream>(request.BeginGetRequestStream,
+        //      request.EndGetRequestStream, null, TaskCreationOptions.None)
+        //      .ContinueWith(task =>
+        //      {
+        //          if (HasError(task, taskCompletionSource)) return;
 
-                  using (var requestStream = task.Result)
-                  {
-                      WriteError(entity, requestStream);
-                  }
-              })
-              .ContinueWith(task =>
-              {
-                  if (HasError(task, taskCompletionSource)) return;
+        //          using (var requestStream = task.Result)
+        //          {
+        //              WriteError(entity, requestStream);
+        //          }
+        //      })
+        //      .ContinueWith(task =>
+        //      {
+        //          if (HasError(task, taskCompletionSource)) return;
 
-                  Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse,
-                    request.EndGetResponse, null, TaskCreationOptions.None)
-                    .ContinueWith(task2 =>
-                    {
-                        if (HasError(task2, taskCompletionSource)) return;
+        //          Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse,
+        //            request.EndGetResponse, null, TaskCreationOptions.None)
+        //            .ContinueWith(task2 =>
+        //            {
+        //                if (HasError(task2, taskCompletionSource)) return;
 
-                        WebResponse webResponse = null;
-                        try
-                        {
+        //                WebResponse webResponse = null;
+        //                try
+        //                {
 
-                            webResponse = task2.Result;
-                            taskCompletionSource.SetResult(true);
-                        }
-                        catch (WebException ex)
-                        {
-                            taskCompletionSource.SetException(ex.WrapException());
-                        }
-                        finally
-                        {
-                            if (webResponse != null)
-                                webResponse.Close();
-                        }
-                    });
-              });
-            return taskCompletionSource.Task;
-        }
+        //                    webResponse = task2.Result;
+        //                    taskCompletionSource.SetResult(true);
+        //                }
+        //                catch (WebException ex)
+        //                {
+        //                    taskCompletionSource.SetException(ex.WrapException());
+        //                }
+        //                finally
+        //                {
+        //                    if (webResponse != null)
+        //                        webResponse.Close();
+        //                }
+        //            });
+        //      });
+        //    return taskCompletionSource.Task;
+        //}
 
-        private static bool HasError(Task task, TaskCompletionSource<bool> taskCompletionSource)
-        {
-            if (taskCompletionSource.Task.IsCompleted && taskCompletionSource.Task.IsFaulted) return true;
-            if (task.IsFaulted && task.Exception != null)
-            {
-                taskCompletionSource.SetException(task.Exception);
-                return true;
-            }
-            return false;
-        }
+        //private static bool HasError(Task task, TaskCompletionSource<bool> taskCompletionSource)
+        //{
+        //    if (taskCompletionSource.Task.IsCompleted && taskCompletionSource.Task.IsFaulted) return true;
+        //    if (task.IsFaulted && task.Exception != null)
+        //    {
+        //        taskCompletionSource.SetException(task.Exception);
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
         private static void WriteError(Error entity, Stream requestStream)
         {

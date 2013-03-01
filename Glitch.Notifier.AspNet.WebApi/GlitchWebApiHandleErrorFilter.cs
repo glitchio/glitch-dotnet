@@ -1,9 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Filters;
 
-namespace Glitch.Notifier.AspNet.Http
+namespace Glitch.Notifier.AspNet.WebApi
 {
     public class GlitchWebApiHandleErrorFilter : IExceptionFilter
     {
@@ -22,17 +23,18 @@ namespace Glitch.Notifier.AspNet.Http
         public Task ExecuteExceptionFilterAsync(HttpActionExecutedContext actionExecutedContext, CancellationToken cancellationToken)
         {
             var completionSource = new TaskCompletionSource<bool>();
-            Glitch.Factory.WebApiError(actionExecutedContext, ErrorProfile)
-                .WithContextData()
-                .SendAsync()
-                .ContinueWith(t =>
-                                  {
-                                      if (t.IsFaulted && t.Exception != null)
-                                      {
-                                          Trace.Write(t.Exception.ToString());
-                                      }
-                                      completionSource.SetResult(true);
-                                  });
+            try
+            {
+                Glitch.Factory.WebApiError(actionExecutedContext, ErrorProfile)
+                    .WithContextData()
+                    .Send();
+            }
+            catch (Exception ex)
+            {
+                Trace.Write(ex.ToString());
+            }
+
+            completionSource.SetResult(true);
             return completionSource.Task;
         }
     }

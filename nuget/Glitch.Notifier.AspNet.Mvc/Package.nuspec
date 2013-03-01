@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-     <id>Glitch.Notifier.AspNet</id>
+     <id>Glitch.Notifier.AspNet.Mvc</id>
     <version>0.1.0</version>
     <authors>Javier Crespo / Stijn Roosen</authors>
     <owners>Glitch.io</owners>
@@ -9,12 +9,13 @@
     <projectUrl>https://github.com/glitchio/glitch-dotnet</projectUrl>
     <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Glitch.io ASP.NET notifier</description>
+    <description>Glitch.io ASP.NET MVC notifier</description>
     <releaseNotes>Initial version.</releaseNotes>
     <copyright>Copyright Glitch.io 2013</copyright>
-    <tags>Glitch.io error logging unhandled exception web asp.net</tags>
+    <tags>Glitch.io error logging unhandled exception web asp.net mvc</tags>
     <dependencies>
       <dependency id="Glitch.Notifier" version="0.1" />
+	  <dependency id="Glitch.Notifier.AspNet" version="0.1" />
     </dependencies>
   </metadata>
 </package>

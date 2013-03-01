@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using Glitch.Notifier.AspNet.Utils;
 
 namespace Glitch.Notifier.AspNet
 {
@@ -82,7 +83,7 @@ namespace Glitch.Notifier.AspNet
 
         public static T WithServerInfo<T>(this T wrapper) where T: HttpError
         {
-            wrapper.Error.With("ServerInfo", Utils.GetServerInfo());
+            wrapper.Error.With("ServerInfo", ServerUtils.GetServerInfo());
             return wrapper;
         }
 

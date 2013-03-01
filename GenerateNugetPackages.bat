@@ -4,3 +4,7 @@ cd nuget\Glitch.Notifier
 ..\nuget.exe pack
 cd ..\Glitch.Notifier.AspNet
 ..\nuget.exe pack
+cd ..\Glitch.Notifier.AspNet.Mvc
+..\nuget.exe pack
+cd ..\Glitch.Notifier.AspNet.WebApi
+..\nuget.exe pack

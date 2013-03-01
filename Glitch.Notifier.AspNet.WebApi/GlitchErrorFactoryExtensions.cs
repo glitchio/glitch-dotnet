@@ -1,6 +1,6 @@
 using System.Web.Http.Filters;
 
-namespace Glitch.Notifier.AspNet.Http
+namespace Glitch.Notifier.AspNet.WebApi
 {
     public static class GlitchErrorFactoryExtensions
     {

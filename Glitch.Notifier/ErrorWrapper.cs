@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Glitch.Notifier
 {
@@ -18,11 +17,6 @@ namespace Glitch.Notifier
         public void Send()
         {
             Error.Send();
-        }
-
-        public Task SendAsync()
-        {
-            return Error.SendAsync();
         }
     }
 }

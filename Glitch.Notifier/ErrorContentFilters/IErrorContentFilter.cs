@@ -5,8 +5,7 @@ using System.Text;
 
 namespace Glitch.Notifier.ErrorContentFilters
 {
-    public class ErrorContentFilter
+    interface IErrorContentFilter
     {
-        
     }
 }

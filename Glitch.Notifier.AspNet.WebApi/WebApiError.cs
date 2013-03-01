@@ -2,8 +2,9 @@
 using System.Web;
 using System.Web.Http.Filters;
 using System.Net.Http;
+using Glitch.Notifier.AspNet.Utils;
 
-namespace Glitch.Notifier.AspNet.Http
+namespace Glitch.Notifier.AspNet.WebApi
 {
     public class WebApiError : ErrorWrapper
     {
@@ -83,7 +84,7 @@ namespace Glitch.Notifier.AspNet.Http
 
         public WebApiError WithServerInfo()
         {
-            Error.With("ServerInfo", Utils.GetServerInfo());
+            Error.With("ServerInfo", ServerUtils.GetServerInfo());
             return this;
         }
 

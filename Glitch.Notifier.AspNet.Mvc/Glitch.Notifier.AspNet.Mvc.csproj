@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{66611FEB-FFFA-4FB7-A855-E603797132FA}</ProjectGuid>
+    <ProjectGuid>{23A82103-93D5-40FE-A640-DAD118366E32}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Glitch.Notifier.AspNet</RootNamespace>
-    <AssemblyName>Glitch.Notifier.AspNet</AssemblyName>
+    <RootNamespace>Glitch.Notifier.AspNet.Mvc</RootNamespace>
+    <AssemblyName>Glitch.Notifier.AspNet.Mvc</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,37 +34,38 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>External Assemblies\System.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ErrorFilters\ContainsUrlFragmentErrorFilter.cs" />
-    <Compile Include="ErrorFilters\RegexUrlErrorFilter.cs" />
-    <Compile Include="ErrorFilters\ErrorFilterPipelineExtensions.cs" />
-    <Compile Include="ErrorFilters\HttpCodeErrorFilter.cs" />
     <Compile Include="GlitchErrorFactoryExtensions.cs" />
-    <Compile Include="Utils\HttpContextBaseExtensions.cs" />
-    <Compile Include="HttpError.cs" />
-    <Compile Include="Utils\Utils.cs" />
+    <Compile Include="GlitchHandleErrorAttribute.cs" />
+    <Compile Include="MvcError.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GlitchHttpModule.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Glitch.Notifier.AspNet\Glitch.Notifier.AspNet.csproj">
+      <Project>{66611feb-fffa-4fb7-a855-e603797132fa}</Project>
+      <Name>Glitch.Notifier.AspNet</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Glitch.Notifier\Glitch.Notifier.csproj">
       <Project>{edcba660-02e2-4824-9c8d-33f98b8aa3bf}</Project>
       <Name>Glitch.Notifier</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="External Assemblies\System.Web.Mvc.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)nuget\Glitch.Notifier.AspNet\lib\35\"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetPath)" "$(SolutionDir)nuget\Glitch.Notifier.AspNet.Mvc\lib\35\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
