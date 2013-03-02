@@ -60,6 +60,7 @@
     <Compile Include="AspNetSpecifications\ErrorFilterSpecifications\ErrorFilterSpecificationBase.cs" />
     <Compile Include="AspNetSpecifications\ErrorFilterSpecifications\RegexUrlFilterSpecifications.cs" />
     <Compile Include="AspNetSpecifications\ErrorFilterSpecifications\HttpCodeErrorFilterSpecifications.cs" />
+    <Compile Include="CoreSpecifications\ErrorContentFilterSpecifications.cs" />
     <Compile Include="CoreSpecifications\ErrorFilterSpecifications\ContainsErrorMessageFilterSpecifications.cs" />
     <Compile Include="CoreSpecifications\ErrorFilterSpecifications\ExpressionErrorFilterSpecifications.cs" />
     <Compile Include="CoreSpecifications\ErrorFilterSpecifications\ErrorFilterSpecifications.cs" />

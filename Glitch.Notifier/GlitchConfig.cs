@@ -99,13 +99,11 @@ namespace Glitch.Notifier
             get { return _ignoreErrors; }
         }
 
-        private readonly ErrorContentFilter _ignoreContent = new ErrorContentFilter();
+        private readonly ErrorContentFilter _errorContentFilter = new ErrorContentFilter();
 
         public ErrorContentFilter IgnoreContent
         {
-            get { return _ignoreContent; }
+            get { return _errorContentFilter; }
         }
-
-        
     }
 }

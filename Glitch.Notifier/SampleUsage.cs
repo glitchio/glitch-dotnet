@@ -17,8 +17,6 @@ namespace Glitch.Notifier
 
             Glitch.Config.IgnoreErrors.WithErrorMessageContaining("test");
 
-            Glitch.Config.IgnoreContent.FromCookiesWithFieldsContaining("ASPAUX");
-
             Glitch.Factory.Error("error")
                   .WithErrorProfile("my-other-profile")
                   .With("controller", "AccountController")

@@ -47,7 +47,7 @@
   <ItemGroup>
     <Compile Include="ErrorFilters\ContainsUrlFragmentErrorFilter.cs" />
     <Compile Include="ErrorFilters\RegexUrlErrorFilter.cs" />
-    <Compile Include="ErrorFilters\ErrorFilterPipelineExtensions.cs" />
+    <Compile Include="ErrorFilters\ErrorFilterExtensions.cs" />
     <Compile Include="ErrorFilters\HttpCodeErrorFilter.cs" />
     <Compile Include="GlitchErrorFactoryExtensions.cs" />
     <Compile Include="Utils\HttpContextBaseExtensions.cs" />

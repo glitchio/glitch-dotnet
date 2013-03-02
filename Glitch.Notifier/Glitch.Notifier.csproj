@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="Error.cs" />
     <Compile Include="ErrorContentFilters\ErrorContentFilter.cs" />
-    <Compile Include="ErrorContentFilters\ErrorContentFilterExtensions.cs" />
     <Compile Include="ErrorContentFilters\IErrorContentFilter.cs" />
     <Compile Include="ErrorFilters\ContainsErrorMessageFilter.cs" />
     <Compile Include="ErrorFilters\ErrorFilterExtensions.cs" />

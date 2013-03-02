@@ -7,7 +7,7 @@ using Glitch.Notifier.ErrorFilters;
 
 namespace Glitch.Notifier.AspNet.ErrorFilters
 {
-    public static class ErrorFilterPipelineExtensions
+    public static class ErrorFilterExtensions
     {
         public static ErrorFilter WithHttpCode(this ErrorFilter pipeline, HttpStatusCode statusCode)
         {

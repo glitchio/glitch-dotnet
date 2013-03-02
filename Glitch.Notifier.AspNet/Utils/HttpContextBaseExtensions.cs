@@ -99,15 +99,19 @@ namespace Glitch.Notifier.AspNet.Utils
 
         private static Dictionary<string, string> ToDictionary(NameValueCollection source)
         {
-            return source.Cast<string>()
+            var result = source.Cast<string>()
                 .Select(s => new { Key = s, Value = source[s] })
                 .ToDictionary(p => p.Key, p => p.Value);
+            Glitch.Config.IgnoreContent.Filter(result);
+            return result;
         }
 
         private static Dictionary<string, string> ToDictionary(HttpCookieCollection cookies)
         {
-            return cookies.Cast<HttpCookie>()
+            var result = cookies.Cast<HttpCookie>()
                 .ToDictionary(p => p.Name, p => p.Value);
+            Glitch.Config.IgnoreContent.Filter(result);
+            return result;
         }
     }
 }
