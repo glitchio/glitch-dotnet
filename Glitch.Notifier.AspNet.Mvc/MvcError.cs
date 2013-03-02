@@ -2,7 +2,7 @@
 
 namespace Glitch.Notifier.AspNet.Mvc
 {
-    public class MvcError : HttpError
+    public class MvcError : HttpContextError
     {
         private readonly ExceptionContext _exceptionContext;
 

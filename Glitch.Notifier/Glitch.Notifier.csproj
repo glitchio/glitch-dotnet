@@ -54,7 +54,7 @@
     <Compile Include="ErrorFilters\ExpressionErrorFilter.cs" />
     <Compile Include="ErrorFilters\IErrorFilter.cs" />
     <Compile Include="ErrorFilters\RegexErrorMessageFilter.cs" />
-    <Compile Include="ErrorWrapper.cs" />
+    <Compile Include="ErrorContextWrapper.cs" />
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="Glitch.cs" />
     <Compile Include="Crypto.cs" />

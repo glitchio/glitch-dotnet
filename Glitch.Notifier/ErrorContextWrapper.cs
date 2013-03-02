@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Glitch.Notifier
 {
-    public abstract class ErrorWrapper
+    public abstract class ErrorContextWrapper
     {
         public Error Error { get; private set; }
 
-        protected ErrorWrapper(Error error)
+        protected ErrorContextWrapper(Error error)
         {
             Error = error;
         }
