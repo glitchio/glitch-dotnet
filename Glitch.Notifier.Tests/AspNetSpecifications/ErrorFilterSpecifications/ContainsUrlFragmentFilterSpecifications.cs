@@ -13,7 +13,7 @@ using Moq;
 namespace Glitch.Notifier.Tests.AspNetSpecifications.ErrorFilterSpecifications
 {
     [TestClass]
-    public class ContainsUrlFragmentFilterSpecifications : ErrorFilterSpecificationBase
+    public class ContainsUrlFragmentFilterSpecifications : AspNetSpecificationBase
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]

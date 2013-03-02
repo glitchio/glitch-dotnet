@@ -108,8 +108,9 @@ namespace Glitch.Notifier.AspNet.Utils
 
         private static Dictionary<string, string> ToDictionary(HttpCookieCollection cookies)
         {
-            var result = cookies.Cast<HttpCookie>()
-                .ToDictionary(p => p.Name, p => p.Value);
+            var result = cookies.Cast<string>()
+               .Select(s => new { Key = s, cookies[s].Value })
+               .ToDictionary(p => p.Key, p => p.Value);
             Glitch.Config.IgnoreContent.Filter(result);
             return result;
         }

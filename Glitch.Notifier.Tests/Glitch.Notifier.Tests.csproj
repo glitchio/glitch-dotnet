@@ -56,8 +56,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AspNetSpecifications\ErrorFilterSpecifications\ContainsErrorMessageFilterSpecifications.cs" />
-    <Compile Include="AspNetSpecifications\ErrorFilterSpecifications\ErrorFilterSpecificationBase.cs" />
+    <Compile Include="AspNetSpecifications\ErrorContentFilterSpecifications.cs" />
+    <Compile Include="AspNetSpecifications\ErrorFilterSpecifications\ContainsUrlFragmentFilterSpecifications.cs" />
+    <Compile Include="AspNetSpecifications\ErrorFilterSpecificationBase.cs" />
     <Compile Include="AspNetSpecifications\ErrorFilterSpecifications\RegexUrlFilterSpecifications.cs" />
     <Compile Include="AspNetSpecifications\ErrorFilterSpecifications\HttpCodeErrorFilterSpecifications.cs" />
     <Compile Include="CoreSpecifications\ErrorContentFilterSpecifications.cs" />

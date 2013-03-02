@@ -31,7 +31,7 @@ namespace Glitch.Notifier.AspNet
                     .WithClientInfo()
                     .WithHttpStatusCode()
                     .WithCookies()
-                    .WithFormVariables()
+                    .WithForm()
                     .WithServerVariables()
                     .WithUrlReferer();
         }
@@ -93,7 +93,7 @@ namespace Glitch.Notifier.AspNet
             return wrapper;
         }
 
-        public static T WithFormVariables<T>(this T wrapper) where T:HttpError
+        public static T WithForm<T>(this T wrapper) where T:HttpError
         {
             wrapper.Error.With("Form", wrapper.HttpContext.GetFormVariables());
             return wrapper;

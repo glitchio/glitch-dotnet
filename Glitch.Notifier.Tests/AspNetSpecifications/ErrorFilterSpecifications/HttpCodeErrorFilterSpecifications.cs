@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Glitch.Notifier.Tests.AspNetSpecifications.ErrorFilterSpecifications
 {
     [TestClass]
-    public class HttpCodeErrorFilterSpecifications: ErrorFilterSpecificationBase
+    public class HttpCodeErrorFilterSpecifications : AspNetSpecificationBase
     {
 
         [TestMethod]
