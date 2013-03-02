@@ -75,8 +75,9 @@ namespace Glitch.Notifier
 
         public void Send()
         {
-            if (!Glitch.Config.Notify) return;
             CheckApiKey();
+            if (!Glitch.Config.Notify || Glitch.Config.IgnoreErrors.Exclude(this)) 
+                return;
             ApplyDefaultsIfNeeded();
             NotificationSenderFactory.Create(Glitch.Config.Url, Glitch.Config.ApiKey).Send(this);
         }

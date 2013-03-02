@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Configuration;
+using System.Security.Authentication;
+using Glitch.Notifier.ErrorFilters;
 using Glitch.Notifier.Notifications;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -34,7 +36,6 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorSpecifications
         [TestMethod]
         public void Given_notify_config_flag_set_to_true_Should_notify()
         {
-
             //arrange
             Glitch.Config.SendNotifications(true).UseApiKey("test");
 
@@ -99,6 +100,20 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorSpecifications
 
             //assert
             Assert.AreEqual("test", error.GroupKey);
+        }
+
+        [TestMethod]
+        public void Given_error_is_to_be_filtered_Should_not_notify()
+        {
+            //arrange
+            Glitch.Config.SendNotifications(true).UseApiKey("test")
+                .IgnoreErrors.WithExceptionTypes(typeof(InvalidCredentialException));
+
+            //act
+            Glitch.Factory.Error(new InvalidCredentialException()).Send();
+
+            //assert
+            _notificationSenderMock.Verify(n => n.Send(It.IsAny<Error>()), Times.Never());
         }
     }
 }
