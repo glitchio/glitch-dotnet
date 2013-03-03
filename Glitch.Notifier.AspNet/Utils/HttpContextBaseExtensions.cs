@@ -70,12 +70,23 @@ namespace Glitch.Notifier.AspNet.Utils
             return null;
         }
 
+        private static readonly string[] RedundantServerVariables = new[]
+        {
+            "ALL_", "HTTP_", "HEADER_", "QUERY_STRING", "URL", 
+            "CONTENT_LENGTH", "CONTENT_TYPE", "REQUEST_METHOD",                      
+        };
+
         public static Dictionary<string, string> GetServerVariables(this HttpContextBase context)
         {
             var source = context.Request.ServerVariables;
             if (source.AllKeys.Any())
             {
-                return ToDictionary(source);
+                var result = source.Cast<string>()
+                    .Where(k => !RedundantServerVariables.Any(k.Contains))
+                    .Select(s => new { Key = s, Value = source[s] })
+                    .ToDictionary(v => v.Key, v => v.Value);
+                Glitch.Config.IgnoreContent.Filter(result);
+                return result;
             }
             return null;
         }
