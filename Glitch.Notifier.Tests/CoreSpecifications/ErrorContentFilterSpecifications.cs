@@ -13,7 +13,8 @@ namespace Glitch.Notifier.Tests.CoreSpecifications
     {
         public ErrorContentFilterSpecifications()
         {
-            Glitch.Config.IgnoreContent.WithFieldsContaining("TestField");
+            Glitch.Config.IgnoreContent
+                .FromDataGroupWithFieldsContaining("DataGroupKey","TestField");
         }
 
         [TestMethod]
@@ -21,7 +22,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications
         {
             var input = new Dictionary<string, string> {{"Test1Field", "value"}};
 
-            Glitch.Config.IgnoreContent.Filter(input);
+            Glitch.Config.IgnoreContent.Filter("DataGroupKey", input);
 
             Assert.AreEqual("value", input["Test1Field"]);
         }
@@ -31,7 +32,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications
         {
             var input = new Dictionary<string, string> { { "1TestField4", "value" } };
 
-            Glitch.Config.IgnoreContent.Filter(input);
+            Glitch.Config.IgnoreContent.Filter("DataGroupKey", input);
 
             Assert.AreEqual(ErrorContentFilter.ProtectedText, input["1TestField4"]);
         }

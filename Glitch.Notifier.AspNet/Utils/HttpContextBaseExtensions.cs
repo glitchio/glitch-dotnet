@@ -15,13 +15,13 @@ namespace Glitch.Notifier.AspNet.Utils
             return context.Request.Url.ToString();
         }
 
-        public static IDictionary GetHttpHeaders(this HttpContextBase context)
+        public static Dictionary<string, string> GetHttpHeaders(this HttpContextBase context)
         {
             var sourceHeaders = context.Request.Headers;
             return ToDictionary(sourceHeaders);
         }
 
-        public static IDictionary GetQueryString(this HttpContextBase context)
+        public static Dictionary<string, string> GetQueryString(this HttpContextBase context)
         {
             var source = context.Request.QueryString;
             if (source.AllKeys.Any())
@@ -85,7 +85,6 @@ namespace Glitch.Notifier.AspNet.Utils
                     .Where(k => !RedundantServerVariables.Any(k.Contains))
                     .Select(s => new { Key = s, Value = source[s] })
                     .ToDictionary(v => v.Key, v => v.Value);
-                Glitch.Config.IgnoreContent.Filter(result);
                 return result;
             }
             return null;
@@ -113,7 +112,6 @@ namespace Glitch.Notifier.AspNet.Utils
             var result = source.Cast<string>()
                 .Select(s => new { Key = s, Value = source[s] })
                 .ToDictionary(p => p.Key, p => p.Value);
-            Glitch.Config.IgnoreContent.Filter(result);
             return result;
         }
 
@@ -122,7 +120,6 @@ namespace Glitch.Notifier.AspNet.Utils
             var result = cookies.Cast<string>()
                .Select(s => new { Key = s, cookies[s].Value })
                .ToDictionary(p => p.Key, p => p.Value);
-            Glitch.Config.IgnoreContent.Filter(result);
             return result;
         }
     }

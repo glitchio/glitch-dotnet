@@ -9,27 +9,35 @@ namespace Glitch.Notifier.ErrorContentFilters
     {
         internal const string ProtectedText = "***";
 
-        private readonly List<string> _fields = new List<string>
-                                                    {
-                                                        "_VIEWSTATE",
-                                                        "PASSWORD",
-                                                        "ASPXAUTH"
-                                                    };
-        public void Filter(Dictionary<string, string> data)
+        private readonly Dictionary<string, List<string>> _fieldsByDataGroupKey = new Dictionary<string, List<string>>();
+
+        public void Filter(string dataGroupKey, Dictionary<string, string> data)
         {
-            data.Keys.Where(k => _fields.Any(f => k.IndexOf(f, 
+            List<string> dataFields;
+            if(!_fieldsByDataGroupKey.TryGetValue(dataGroupKey, out dataFields))
+            {
+                return;
+            }
+            data.Keys.Where(k => dataFields.Any(f => k.IndexOf(f, 
                                             StringComparison.OrdinalIgnoreCase) != -1))
                 .ToList()
                 .ForEach(k => data[k] = ProtectedText);
         }
 
-        public ErrorContentFilter WithFieldsContaining(params string[] fields)
+        public ErrorContentFilter FromDataGroupWithFieldsContaining(string dataGroupKey, 
+                                                                    params string[] fields)
         {
-            foreach (var field in 
-                fields.Where(field => _fields.All(f => 
+           List<string> dataFields;
+            if(!_fieldsByDataGroupKey.TryGetValue(dataGroupKey, out dataFields))
+            {
+                _fieldsByDataGroupKey[dataGroupKey] = dataFields = new List<string>();
+            }
+
+            foreach (var field in
+                fields.Where(field => dataFields.All(f => 
                     string.Compare(field, f, StringComparison.OrdinalIgnoreCase) != 0)))
             {
-                _fields.Add(field);
+                dataFields.Add(field);
             }
             return this;
         }

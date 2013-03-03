@@ -38,7 +38,9 @@ namespace Glitch.Notifier.AspNet
 
         public static T WithHttpHeaders<T>(this T wrapper) where T:HttpContextError
         {
-            wrapper.Error.With("HttpHeaders", wrapper.HttpContext.GetHttpHeaders());
+            var headers = wrapper.HttpContext.GetHttpHeaders();
+            Glitch.Config.IgnoreContent.Filter("HttpHeaders", headers);
+            wrapper.Error.With("HttpHeaders", headers);
             return wrapper;
         }
 
@@ -95,19 +97,25 @@ namespace Glitch.Notifier.AspNet
 
         public static T WithForm<T>(this T wrapper) where T:HttpContextError
         {
-            wrapper.Error.With("Form", wrapper.HttpContext.GetFormVariables());
+            var form = wrapper.HttpContext.GetFormVariables();
+            Glitch.Config.IgnoreContent.Filter("Form", form);
+            wrapper.Error.With("Form", form);
             return wrapper;
         }
 
         public static T WithCookies<T>(this T wrapper) where T:HttpContextError
         {
-            wrapper.Error.With("Cookies", wrapper.HttpContext.GetCookies());
+            var cookies = wrapper.HttpContext.GetCookies();
+            Glitch.Config.IgnoreContent.Filter("Cookies", cookies);
+            wrapper.Error.With("Cookies", cookies);
             return wrapper;
         }
 
         public static T WithServerVariables<T>(this T wrapper) where T:HttpContextError
         {
-            wrapper.Error.With("ServerVariables", wrapper.HttpContext.GetServerVariables());
+            var serverVariables = wrapper.HttpContext.GetServerVariables();
+            Glitch.Config.IgnoreContent.Filter("ServerVariables", serverVariables);
+            wrapper.Error.With("ServerVariables", serverVariables);
             return wrapper;
         }
 

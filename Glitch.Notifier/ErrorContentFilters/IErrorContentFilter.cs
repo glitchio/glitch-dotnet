@@ -7,6 +7,6 @@ namespace Glitch.Notifier.ErrorContentFilters
 {
     public interface IErrorContentFilter
     {
-        void Filter(Dictionary<string, string> data);
+        void Filter(string dataGroupKey, Dictionary<string, string> data);
     }
 }

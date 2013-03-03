@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ErrorContentFilters\ErrorContentFilterExtensions.cs" />
     <Compile Include="ErrorFilters\ContainsUrlFragmentErrorFilter.cs" />
     <Compile Include="ErrorFilters\RegexUrlErrorFilter.cs" />
     <Compile Include="ErrorFilters\ErrorFilterExtensions.cs" />

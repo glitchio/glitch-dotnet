@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using Glitch.Notifier.AspNet;
 using Glitch.Notifier.ErrorContentFilters;
+using Glitch.Notifier.AspNet.ErrorContentFilters;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Glitch.Notifier.Tests.AspNetSpecifications
@@ -17,10 +15,12 @@ namespace Glitch.Notifier.Tests.AspNetSpecifications
         [TestMethod]
         public void Should_filter_cookies()
         {
+            Glitch.Config.IgnoreContent
+                .FromCookiesWithNamesContaining(".ASPXAUTH");
             var cookies = new HttpCookieCollection
                               {
                                   new HttpCookie("Test1", "value"), 
-                                  new HttpCookie("ASPXAUTH", "value2")
+                                  new HttpCookie(".ASPXAUTH", "value2")
                               };
             HttpRequest.Setup(r => r.Cookies).Returns(cookies);
 
@@ -31,16 +31,18 @@ namespace Glitch.Notifier.Tests.AspNetSpecifications
             Assert.AreEqual("value", 
                 ((Dictionary<string, string>)wrapper.Error.ExtraData["Cookies"])["Test1"]);
             Assert.AreEqual(ErrorContentFilter.ProtectedText,
-                ((Dictionary<string, string>)wrapper.Error.ExtraData["Cookies"])["ASPXAUTH"]);
+                ((Dictionary<string, string>)wrapper.Error.ExtraData["Cookies"])[".ASPXAUTH"]);
         }
 
         [TestMethod]
         public void Should_filter_server_variables()
         {
+            Glitch.Config.IgnoreContent
+                .FromServerVariablesWithNamesContaining("AUTH_PASSWORD");
             var serverVariables = new NameValueCollection
                                       {
                                           {"Test1", "value"},
-                                          {"ASPXAUTH", "value2"}
+                                          {"AUTH_PASSWORD", "value2"}
                                       };
             HttpRequest.Setup(r => r.ServerVariables).Returns(serverVariables);
 
@@ -51,12 +53,14 @@ namespace Glitch.Notifier.Tests.AspNetSpecifications
             Assert.AreEqual("value",
                 ((Dictionary<string, string>)wrapper.Error.ExtraData["ServerVariables"])["Test1"]);
             Assert.AreEqual(ErrorContentFilter.ProtectedText,
-                ((Dictionary<string, string>)wrapper.Error.ExtraData["ServerVariables"])["ASPXAUTH"]);
+                ((Dictionary<string, string>)wrapper.Error.ExtraData["ServerVariables"])["AUTH_PASSWORD"]);
         }
 
         [TestMethod]
         public void Should_filter_form()
         {
+            Glitch.Config.IgnoreContent
+                .FromFormVariablesWithNamesContaining("_VIEWSTATE");
             var form = new NameValueCollection
                                       {
                                           {"Test1", "value"},
@@ -72,6 +76,28 @@ namespace Glitch.Notifier.Tests.AspNetSpecifications
                 ((Dictionary<string, string>)wrapper.Error.ExtraData["Form"])["Test1"]);
             Assert.AreEqual(ErrorContentFilter.ProtectedText,
                 ((Dictionary<string, string>)wrapper.Error.ExtraData["Form"])["_VIEWSTATE"]);
+        }
+
+        [TestMethod]
+        public void Should_filter_http_headers()
+        {
+            Glitch.Config.IgnoreContent
+                .FromHttpHeadersWithNamesContaining("Auhorization");
+            var headers = new NameValueCollection
+                                      {
+                                          {"Test1", "value"},
+                                          {"Auhorization", "value2"}
+                                      };
+            HttpRequest.Setup(r => r.Headers).Returns(headers);
+
+            var wrapper =
+                Glitch.Factory.HttpContextError(new ArgumentException(), HttpContext.Object)
+                .WithHttpHeaders();
+
+            Assert.AreEqual("value",
+                ((Dictionary<string, string>)wrapper.Error.ExtraData["HttpHeaders"])["Test1"]);
+            Assert.AreEqual(ErrorContentFilter.ProtectedText,
+                ((Dictionary<string, string>)wrapper.Error.ExtraData["HttpHeaders"])["Auhorization"]);
         }
     }
 }
