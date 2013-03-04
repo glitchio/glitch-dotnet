@@ -51,6 +51,7 @@
     <Compile Include="ErrorFilters\ErrorFilterExtensions.cs" />
     <Compile Include="ErrorFilters\HttpCodeErrorFilter.cs" />
     <Compile Include="GlitchErrorFactoryExtensions.cs" />
+    <Compile Include="RegisteredObjectWrapper.cs" />
     <Compile Include="Utils\HttpContextBaseExtensions.cs" />
     <Compile Include="HttpContextError.cs" />
     <Compile Include="Utils\Utils.cs" />

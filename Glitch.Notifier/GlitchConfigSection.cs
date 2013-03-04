@@ -47,5 +47,31 @@ namespace Glitch.Notifier
                 this["notify"] = value;
             }
         }
+
+        [ConfigurationProperty("notificationsMaxIntervalInMinutes", DefaultValue = 1)]
+        public int NotificationsMaxIntervalInMinutes
+        {
+            get
+            {
+                return (int)this["notificationsMaxIntervalInMinutes"];
+            }
+            set
+            {
+                this["notificationsMaxIntervalInMinutes"] = value;
+            }
+        }
+
+        [ConfigurationProperty("notificationsMaxBatchSize", DefaultValue = 10)]
+        public int NotificationsMaxBatchSize
+        {
+            get
+            {
+                return (int)this["notificationsMaxBatchSize"];
+            }
+            set
+            {
+                this["notificationsMaxBatchSize"] = value;
+            }
+        }
     }
 }

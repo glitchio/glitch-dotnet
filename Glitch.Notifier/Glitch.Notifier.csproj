@@ -63,6 +63,10 @@
     <Compile Include="GlitchErrorFactory.cs" />
     <Compile Include="GroupKeyDefaultGenerator.cs" />
     <Compile Include="HttpRequestExtensions.cs" />
+    <Compile Include="Notifications\ErrorBatch.cs" />
+    <Compile Include="Notifications\ErrorQueue.cs" />
+    <Compile Include="Notifications\ErrorSenderWorker.cs" />
+    <Compile Include="Notifications\Worker.cs" />
     <Compile Include="Notifications\INotificationSender.cs" />
     <Compile Include="Notifications\NotificationSender.cs" />
     <Compile Include="Notifications\NotificationSenderFactory.cs" />

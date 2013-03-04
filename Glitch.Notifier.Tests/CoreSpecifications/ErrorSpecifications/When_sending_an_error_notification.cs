@@ -15,7 +15,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorSpecifications
 
         public When_sending_an_error_notification()
         {
-            NotificationSenderFactory.SetFunc((url, apiKey) => _notificationSenderMock.Object);
+            NotificationSenderFactory.SetFactoryFunc(() => _notificationSenderMock.Object);
         }
 
         [TestMethod]

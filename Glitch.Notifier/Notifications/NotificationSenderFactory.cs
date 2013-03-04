@@ -4,14 +4,14 @@ namespace Glitch.Notifier.Notifications
 {
     static class NotificationSenderFactory
     {
-        private static Func<string,string, INotificationSender> _notificationSenderFunc = (url, apiKey) => new NotificationSender(url, apiKey);
+        private static Func<INotificationSender> _notificationSenderFunc = () => new NotificationSender();
 
-        public static INotificationSender Create(string url, string apiKey)
+        public static INotificationSender Create()
         {
-            return _notificationSenderFunc(url, apiKey);
+            return _notificationSenderFunc();
         }
 
-        internal static void SetFunc(Func<string,string, INotificationSender> func)
+        internal static void SetFactoryFunc(Func<INotificationSender> func)
         {
             _notificationSenderFunc = func;
         }

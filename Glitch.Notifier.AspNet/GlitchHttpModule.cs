@@ -2,12 +2,14 @@
 using System.Diagnostics;
 using System.Web;
 using Glitch.Notifier.AspNet.ErrorContentFilters;
+using Glitch.Notifier.Notifications;
 
 namespace Glitch.Notifier.AspNet
 {
     public class GlitchHttpModule : IHttpModule
     {
         private static volatile bool _applicationStarted;
+        private static RegisteredObjectWrapper _registeredObject;
         private static readonly object ApplicationStartLock = new object();
 
         public GlitchHttpModule()
@@ -24,10 +26,15 @@ namespace Glitch.Notifier.AspNet
                 {
                     if(!_applicationStarted)
                     {
+                        //content filter defaults
                         Glitch.Config.IgnoreContent.FromCookiesWithNamesContaining(".APXAUTH")
                             .FromFormVariablesWithNamesContaining("_VIEWSTATE")
                             .FromServerVariablesWithNamesContaining("AUTH_PASSWORD");
 
+                        //Stop the worker thread gracefully when the appdomain is unloaded
+                        _registeredObject = new RegisteredObjectWrapper(ErrorSenderWorker.Instance);
+                        _registeredObject.Register();
+                        
                         _applicationStarted = true;
                     }
                 }

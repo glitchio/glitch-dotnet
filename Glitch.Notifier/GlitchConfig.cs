@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using Glitch.Notifier.ErrorContentFilters;
 using Glitch.Notifier.ErrorFilters;
 
@@ -14,6 +12,8 @@ namespace Glitch.Notifier
             if (section == null) return;
             UseApiKey(section.ApiKey);
             UseHttps(section.UseHttps);
+            WithNotificationsMaxBatchSize(section.NotificationsMaxBatchSize);
+            WithNotificationsMaxInterval(TimeSpan.FromMinutes(section.NotificationsMaxIntervalInMinutes));
             SendNotifications(section.Notify);
         }
 
@@ -84,7 +84,7 @@ namespace Glitch.Notifier
         {
             get
             {
-                return Glitch.Config.Scheme + "://api.glitch.io/v1/errors";
+                return Glitch.Config.Scheme + "://api.glitch.io/v1/errorBatches";
             }
         }
 
@@ -104,6 +104,50 @@ namespace Glitch.Notifier
         public ErrorContentFilter IgnoreContent
         {
             get { return _errorContentFilter; }
+        }
+
+        private int _notificationMaxBatchSize = 10;
+        public int NotificationsMaxBatchSize
+        {
+            get { return _notificationMaxBatchSize; }
+        }
+
+        public GlitchConfig WithNotificationsMaxBatchSize(int maxBatchSize)
+        {
+            Interlocked.Exchange(ref _notificationMaxBatchSize, maxBatchSize);
+            return this;
+        }
+
+        private TimeSpan _notificationsMaxInterval = TimeSpan.FromMinutes(1);
+        private readonly ReaderWriterLockSlim _maxIntervalLock = new ReaderWriterLockSlim();
+        public TimeSpan NotificationsMaxInterval
+        {
+            get
+            {
+                _maxIntervalLock.EnterReadLock();
+                try
+                {
+                    return _notificationsMaxInterval;
+                }
+                finally
+                {
+                    _maxIntervalLock.ExitReadLock();
+                }
+            }
+        }
+
+        public GlitchConfig WithNotificationsMaxInterval(TimeSpan maxInterval)
+        {
+            _maxIntervalLock.EnterWriteLock();
+            try
+            {
+                _notificationsMaxInterval = maxInterval;
+                return this;
+            }
+            finally
+            {
+                _maxIntervalLock.ExitWriteLock();
+            }
         }
     }
 }

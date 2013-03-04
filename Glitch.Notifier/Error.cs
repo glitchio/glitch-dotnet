@@ -79,7 +79,7 @@ namespace Glitch.Notifier
             if (!Glitch.Config.Notify || Glitch.Config.IgnoreErrors.Exclude(this)) 
                 return;
             ApplyDefaultsIfNeeded();
-            NotificationSenderFactory.Create(Glitch.Config.Url, Glitch.Config.ApiKey).Send(this);
+            NotificationSenderFactory.Create().Send(this);
         }
 
         private void ApplyDefaultsIfNeeded()
