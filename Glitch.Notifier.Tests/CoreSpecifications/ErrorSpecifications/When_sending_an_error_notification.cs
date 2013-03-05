@@ -23,7 +23,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorSpecifications
         {
 
             //arrange
-            Glitch.Config.SendNotifications(false).UseApiKey("test");
+            Glitch.Config.SendNotifications(false).WithApiKey("test");
 
             //act
             Glitch.Factory.Error("error")
@@ -37,7 +37,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorSpecifications
         public void Given_notify_config_flag_set_to_true_Should_notify()
         {
             //arrange
-            Glitch.Config.SendNotifications(true).UseApiKey("test");
+            Glitch.Config.SendNotifications(true).WithApiKey("test");
 
             //act
             var error = Glitch.Factory.Error("error");
@@ -52,7 +52,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorSpecifications
         public void Given_apiKey_is_not_configured_Should_throw_an_exception()
         {
             //arrange
-            Glitch.Config.UseApiKey(null).SendNotifications(true);
+            Glitch.Config.WithApiKey(null).SendNotifications(true);
 
             //act
             Glitch.Factory.Error("error").Send();
@@ -62,7 +62,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorSpecifications
         public void Given_group_key_is_specified_Should_not_change_it()
         {
             //arrange
-            Glitch.Config.UseApiKey("test").SendNotifications(true);
+            Glitch.Config.WithApiKey("test").SendNotifications(true);
 
             //act
             var error = Glitch.Factory.Error("test").WithGroupKey("groupKey");
@@ -76,7 +76,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorSpecifications
         public void Given_group_key_is_not_specified_Should_generate_one()
         {
             //arrange
-            Glitch.Config.UseApiKey("test").SendNotifications(true);
+            Glitch.Config.WithApiKey("test").SendNotifications(true);
 
             //act
             var error = Glitch.Factory.Error("test");
@@ -91,7 +91,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorSpecifications
         public void Given_group_key_generator_is_specified_Should_use_it_to_compute_the_group_key()
         {
             //arrange
-            Glitch.Config.UseApiKey("test").SendNotifications(true)
+            Glitch.Config.WithApiKey("test").SendNotifications(true)
                     .WithGroupKeyGenerator(e => e.ErrorMessage);
 
             //act
@@ -106,7 +106,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorSpecifications
         public void Given_error_is_to_be_filtered_Should_not_notify()
         {
             //arrange
-            Glitch.Config.SendNotifications(true).UseApiKey("test")
+            Glitch.Config.SendNotifications(true).WithApiKey("test")
                 .IgnoreErrors.WithExceptionTypes(typeof(InvalidCredentialException));
 
             //act

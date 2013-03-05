@@ -14,10 +14,9 @@ namespace Glitch.Notifier.Notifications
     {
         private readonly static ErrorSenderWorker _instance = new ErrorSenderWorker();
 
-        internal ErrorSenderWorker()
-        {
-            
-        }
+        public event Action<ErrorBatchDeliveryInfo> OnBatchDelivered = delegate { };
+
+        internal ErrorSenderWorker() { }
 
         public static ErrorSenderWorker Instance
         {
@@ -40,12 +39,14 @@ namespace Glitch.Notifier.Notifications
             }
             try
             {
-                using (request.GetResponse()) { }
+                using (request.GetResponse())
+                {
+                    OnBatchDelivered(new ErrorBatchDeliveryInfo(errors));
+                }
             }
             catch (WebException ex)
             {
-                ex.HandleWebException();
-
+                OnBatchDelivered(new ErrorBatchDeliveryInfo(errors, ex.HandleWebException()));
             }
         }
 

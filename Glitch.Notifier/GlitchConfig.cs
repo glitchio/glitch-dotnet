@@ -10,20 +10,20 @@ namespace Glitch.Notifier
         public GlitchConfig(GlitchConfigSection section)
         {
             if (section == null) return;
-            UseApiKey(section.ApiKey);
-            UseHttps(section.UseHttps);
+            WithApiKey(section.ApiKey);
+            WithHttps(section.UseHttps);
             WithNotificationsMaxBatchSize(section.NotificationsMaxBatchSize);
             WithNotificationsMaxInterval(TimeSpan.FromMinutes(section.NotificationsMaxIntervalInMinutes));
             SendNotifications(section.Notify);
         }
 
-        public GlitchConfig UseApiKey(string apiKey)
+        public GlitchConfig WithApiKey(string apiKey)
         {
             ApiKey = apiKey;
             return this;
         }
 
-        public GlitchConfig UseHttps(bool https)
+        public GlitchConfig WithHttps(bool https)
         {
             IsHttps = https;
             return this;
@@ -35,7 +35,7 @@ namespace Glitch.Notifier
             return this;
         }
 
-        public GlitchConfig UseDefaultErrorProfile(string errorProfile)
+        public GlitchConfig WithDefaultErrorProfile(string errorProfile)
         {
             ErrorProfile = errorProfile;
             return this;
@@ -84,7 +84,7 @@ namespace Glitch.Notifier
         {
             get
             {
-                return Glitch.Config.Scheme + "://api.glitch.io/v1/errorBatches";
+                return Glitch.Config.Scheme + "://api.glitch.io/v1/errors";
             }
         }
 

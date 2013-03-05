@@ -70,6 +70,7 @@
     <Compile Include="CoreSpecifications\ErrorSenderWorkerSpecifications.cs" />
     <Compile Include="CoreSpecifications\ErrorSpecifications\When_sending_an_error_notification.cs" />
     <Compile Include="CoreSpecifications\GlitchConfigSpecifications.cs" />
+    <Compile Include="CoreSpecifications\IntegrationSpecifications\When_delivering_an_error_batch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

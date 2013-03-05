@@ -11,9 +11,9 @@ namespace Glitch.Notifier
     {
         public void Test()
         {
-            Glitch.Config.UseApiKey("234234324")
-                .UseHttps(true)
-                .UseDefaultErrorProfile("my-profile");
+            Glitch.Config.WithApiKey("234234324")
+                .WithHttps(true)
+                .WithDefaultErrorProfile("my-profile");
 
             Glitch.Config.IgnoreErrors.WithErrorMessageContaining("test");
 

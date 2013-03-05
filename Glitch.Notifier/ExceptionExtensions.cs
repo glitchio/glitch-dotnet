@@ -16,9 +16,9 @@ namespace Glitch.Notifier
             }
         }
 
-        public static void HandleWebException(this WebException exception)
+        public static Exception HandleWebException(this WebException exception)
         {
-            throw exception.WrapException();
+            return exception.WrapException();
         }
 
         public static Exception WrapException(this WebException exception)
