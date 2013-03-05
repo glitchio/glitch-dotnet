@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Glitch.Notifier.Notifications
 {
-    class ErrorBatch
+    public class ErrorBatch
     {
         public ErrorBatch(Error[] errors)
         {

@@ -67,6 +67,7 @@
     <Compile Include="CoreSpecifications\ErrorFilterSpecifications\ErrorFilterSpecifications.cs" />
     <Compile Include="CoreSpecifications\ErrorFilterSpecifications\ExceptionTypeErrorFilterSpecifications.cs" />
     <Compile Include="CoreSpecifications\ErrorFilterSpecifications\RegexErrorMessageFilterSpecifications.cs" />
+    <Compile Include="CoreSpecifications\ErrorSenderWorkerSpecifications.cs" />
     <Compile Include="CoreSpecifications\ErrorSpecifications\When_sending_an_error_notification.cs" />
     <Compile Include="CoreSpecifications\GlitchConfigSpecifications.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

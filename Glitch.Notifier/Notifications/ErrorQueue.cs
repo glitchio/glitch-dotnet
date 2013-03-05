@@ -39,20 +39,8 @@ namespace Glitch.Notifier.Notifications
 
         public static Error[] Pop(TimeSpan timeout, ManualResetEvent cancelEvent)
         {
-            LockSlim.EnterUpgradeableReadLock();
-            try
-            {
-                if (Queue.Count < MaximumBatchSize)
-                {
-                    WaitHandle.WaitAny(new WaitHandle[] { HasEnoughItemsEvent, cancelEvent }, timeout);
-                }
-                return Pop();
-            }
-            finally
-            {
-                LockSlim.EnterUpgradeableReadLock();
-                HasEnoughItemsEvent.Reset();
-            }
+            WaitHandle.WaitAny(new WaitHandle[] { HasEnoughItemsEvent, cancelEvent }, timeout);
+            return Pop();
         }
 
         private static Error[] Pop()
@@ -60,7 +48,23 @@ namespace Glitch.Notifier.Notifications
             LockSlim.EnterWriteLock();
             try
             {
-                return Queue.Take(MaximumBatchSize).ToArray();
+                var items = Queue.Take(MaximumBatchSize).ToArray();
+                if (Queue.Count < MaximumBatchSize) HasEnoughItemsEvent.Reset();
+
+                return items;
+            }
+            finally
+            {
+                LockSlim.ExitWriteLock();
+            }
+        }
+
+        internal static void Clear()
+        {
+            LockSlim.EnterWriteLock();
+            try
+            {
+                Queue.Clear();
             }
             finally
             {

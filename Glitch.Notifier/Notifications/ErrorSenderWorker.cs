@@ -27,10 +27,11 @@ namespace Glitch.Notifier.Notifications
         protected override void DoWork(ManualResetEvent stopEvent)
         {
             var errors = ErrorQueue.Pop(Glitch.Config.NotificationsMaxInterval, stopEvent);
+            if (errors.Length == 0) return;
             Send(new ErrorBatch(errors));
         }
 
-        private void Send(ErrorBatch errors)
+        protected virtual void Send(ErrorBatch errors)
         {
             var request = CreateRequest();
             using (var requestStream = request.GetRequestStream())
