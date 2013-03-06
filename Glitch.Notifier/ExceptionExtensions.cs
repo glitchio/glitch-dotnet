@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using Newtonsoft.Json.Linq;
+using ServiceStack.Text;
 
 namespace Glitch.Notifier
 {
@@ -45,10 +45,10 @@ namespace Glitch.Notifier
             using (var responseStream = response.GetResponseStream())
             using (var reader = new StreamReader(responseStream))
             {
-                var result = JObject.Parse(reader.ReadToEnd());
-                var error = result.Property("message");
+                var result = JsonObject.Parse(reader.ReadToEnd());
+                var error = result.Object("message");
                 if (error != null)
-                    return error.Value.ToString();
+                    return error.ToString();
             }
             return "Error occurred.";
         }

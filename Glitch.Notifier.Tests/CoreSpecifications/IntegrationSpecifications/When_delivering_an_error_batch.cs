@@ -24,6 +24,9 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.IntegrationSpecifications
             Glitch.Config.WithHttps(false)
                 .WithApiKey("4b5edd5ccef34e999ab6a40798f68de1")
                 .WithNotificationsMaxBatchSize(2);
+            ErrorQueue.Clear();
+            ErrorSenderWorker.Instance.Start();
+
             ErrorSenderWorker.Instance.OnBatchDelivered += Instance_OnBatchDelivered;
 
             Glitch.Factory.Error("Test error")
@@ -31,12 +34,13 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.IntegrationSpecifications
             Glitch.Factory.Error("Test error 2")
                           .Send();
 
-            ErrorDeliveryTask.Wait(TimeSpan.FromMinutes(1));
+            Assert.IsTrue(ErrorDeliveryTask.Wait(TimeSpan.FromMinutes(1)));
+            ErrorSenderWorker.Instance.Stop(TimeSpan.Zero);
+            ErrorSenderWorker.Instance.OnBatchDelivered -= Instance_OnBatchDelivered;
             var info = ErrorDeliveryTask.Result;
             Assert.AreEqual(2, info.ErrorBatch.Errors.Length);
             Assert.IsNull(info.Exception);
             Assert.IsTrue(info.Succeeded);
-            ErrorSenderWorker.Instance.Stop(TimeSpan.Zero);
         }
 
         void Instance_OnBatchDelivered(ErrorBatchDeliveryInfo info)

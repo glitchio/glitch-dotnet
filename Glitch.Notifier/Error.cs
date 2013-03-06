@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Runtime.Serialization;
 using Glitch.Notifier.Notifications;
-using Newtonsoft.Json;
 
 namespace Glitch.Notifier
 {
@@ -25,7 +25,7 @@ namespace Glitch.Notifier
             ExtraData["StackTrace"] = exception.ToString();
         }
 
-        [JsonIgnore]
+        [IgnoreDataMember]
         public Exception Exception { get; private set; }
 
         public Dictionary<string, object> ExtraData { get; internal set; }

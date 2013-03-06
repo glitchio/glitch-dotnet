@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Glitch.Notifier.Notifications
 {
@@ -35,7 +29,7 @@ namespace Glitch.Notifier.Notifications
             var request = CreateRequest();
             using (var requestStream = request.GetRequestStream())
             {
-                WriteError(errors, requestStream);
+                ErrorBatchSerializer.Serialize(errors, requestStream);
             }
             try
             {
@@ -47,17 +41,6 @@ namespace Glitch.Notifier.Notifications
             catch (WebException ex)
             {
                 OnBatchDelivered(new ErrorBatchDeliveryInfo(errors, ex.HandleWebException()));
-            }
-        }
-
-        private static void WriteError(ErrorBatch entity, Stream requestStream)
-        {
-            using (var textWriter = new StreamWriter(requestStream))
-            {
-                new JsonSerializer
-                {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                }.Serialize(textWriter, entity);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -50,7 +51,6 @@ namespace Glitch.Notifier.Notifications
             {
                 var items = Queue.Take(MaximumBatchSize).ToArray();
                 if (Queue.Count < MaximumBatchSize) HasEnoughItemsEvent.Reset();
-
                 return items;
             }
             finally
@@ -65,6 +65,7 @@ namespace Glitch.Notifier.Notifications
             try
             {
                 Queue.Clear();
+                HasEnoughItemsEvent.Reset();
             }
             finally
             {

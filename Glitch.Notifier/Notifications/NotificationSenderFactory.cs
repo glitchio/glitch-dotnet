@@ -15,5 +15,10 @@ namespace Glitch.Notifier.Notifications
         {
             _notificationSenderFunc = func;
         }
+
+        internal static void ResetFactoryFunc()
+        {
+            _notificationSenderFunc = () => new NotificationSender();
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications
     [TestClass]
     public class ErrorSenderWorkerSpecifications
     {
-        private readonly TestErrorSenderWorker _testErrorSenderWorker = new TestErrorSenderWorker();
+        private TestErrorSenderWorker _testErrorSenderWorker ;
 
         public ErrorSenderWorkerSpecifications()
         {
@@ -21,6 +21,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications
         [TestInitialize]
         public void TestInitialize()
         {
+            _testErrorSenderWorker = new TestErrorSenderWorker();
             ErrorQueue.Clear();
         }
 
@@ -71,9 +72,9 @@ namespace Glitch.Notifier.Tests.CoreSpecifications
         [TestMethod]
         public void Given_the_worker_is_stopped_Should_notify_pending_queue_notifications()
         {
-            _testErrorSenderWorker.Start();
-
             ErrorQueue.Push(new Error("error"));
+
+            _testErrorSenderWorker.Start();
 
             Assert.IsFalse(_testErrorSenderWorker.DeliveredTask.Wait(TimeSpan.FromSeconds(1)));
 

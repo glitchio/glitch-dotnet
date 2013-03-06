@@ -13,9 +13,16 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.ErrorSpecifications
     {
         private readonly Mock<INotificationSender> _notificationSenderMock = new Mock<INotificationSender>();
 
-        public When_sending_an_error_notification()
+        [TestInitialize]
+        public void TestInitialize()
         {
             NotificationSenderFactory.SetFactoryFunc(() => _notificationSenderMock.Object);
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            NotificationSenderFactory.ResetFactoryFunc();
         }
 
         [TestMethod]
