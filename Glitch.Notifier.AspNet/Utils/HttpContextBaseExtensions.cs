@@ -67,7 +67,7 @@ namespace Glitch.Notifier.AspNet.Utils
             {
                 return ToDictionary(source);
             }
-            return null;
+            return new Dictionary<string, string>();
         }
 
         private static readonly string[] RedundantServerVariables = new[]
@@ -87,7 +87,7 @@ namespace Glitch.Notifier.AspNet.Utils
                     .ToDictionary(v => v.Key, v => v.Value);
                 return result;
             }
-            return null;
+            return new Dictionary<string, string>();
         }
 
         public static Dictionary<string, string> GetCookies(this HttpContextBase context)
@@ -97,7 +97,7 @@ namespace Glitch.Notifier.AspNet.Utils
             {
                 return ToDictionary(source);
             }
-            return null;
+            return new Dictionary<string, string>();
         }
 
         public static string GetUrlReferer(this HttpContextBase context)

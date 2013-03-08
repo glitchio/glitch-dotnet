@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using Glitch.Notifier.ErrorFilters;
+﻿using System.Configuration;
+using Glitch.Notifier.ConfigElements;
 
 namespace Glitch.Notifier
 {
@@ -72,6 +68,18 @@ namespace Glitch.Notifier
             {
                 this["notificationsMaxBatchSize"] = value;
             }
+        }
+
+        [ConfigurationProperty("ignoreErrors")]
+        public GenericConfigurationElementCollection<IgnoreErrorsElement> IgnoreErrors
+        {
+            get { return (GenericConfigurationElementCollection<IgnoreErrorsElement>)this["ignoreErrors"]; }
+        }
+
+        [ConfigurationProperty("ignoreContent")]
+        public GenericConfigurationElementCollection<IgnoreContentElement> IgnoreContent
+        {
+            get { return (GenericConfigurationElementCollection<IgnoreContentElement>)this["ignoreContent"]; }
         }
     }
 }

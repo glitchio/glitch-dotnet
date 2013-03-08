@@ -14,7 +14,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications
         public ErrorContentFilterSpecifications()
         {
             Glitch.Config.IgnoreContent
-                .FromDataGroupWithFieldsContaining("DataGroupKey","TestField");
+                .FromDataGroupWithKeysContaining("DataGroupKey","TestField");
         }
 
         [TestMethod]

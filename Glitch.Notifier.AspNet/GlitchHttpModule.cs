@@ -20,11 +20,11 @@ namespace Glitch.Notifier.AspNet
         public string ErrorProfile { get; set; }
         public void Init(HttpApplication context)
         {
-            if(!_applicationStarted)
+            if (!_applicationStarted)
             {
                 lock (ApplicationStartLock)
                 {
-                    if(!_applicationStarted)
+                    if (!_applicationStarted)
                     {
                         //content filter defaults
                         Glitch.Config.IgnoreContent.FromCookiesWithNamesContaining(".APXAUTH")
@@ -32,9 +32,9 @@ namespace Glitch.Notifier.AspNet
                             .FromServerVariablesWithNamesContaining("AUTH_PASSWORD");
 
                         //Stop the worker thread gracefully when the appdomain is unloaded
-                        _registeredObject = new RegisteredObjectWrapper(ErrorSenderWorker.Instance);
+                        _registeredObject = new RegisteredObjectWrapper(timeSpan => Glitch.Notifications.Stop(timeSpan));
                         _registeredObject.Register();
-                        
+
                         _applicationStarted = true;
                     }
                 }

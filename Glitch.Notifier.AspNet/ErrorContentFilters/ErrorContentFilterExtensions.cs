@@ -12,7 +12,7 @@ namespace Glitch.Notifier.AspNet.ErrorContentFilters
             FromCookiesWithNamesContaining(this ErrorContentFilter filter,
                                             params string[] fields)
         {
-            filter.FromDataGroupWithFieldsContaining("Cookies", fields);
+            filter.FromDataGroupWithKeysContaining("Cookies", fields);
             return filter;
         }
 
@@ -20,7 +20,7 @@ namespace Glitch.Notifier.AspNet.ErrorContentFilters
            FromServerVariablesWithNamesContaining(this ErrorContentFilter filter,
                                            params string[] fields)
         {
-            filter.FromDataGroupWithFieldsContaining("ServerVariables", fields);
+            filter.FromDataGroupWithKeysContaining("ServerVariables", fields);
             return filter;
         }
 
@@ -28,7 +28,7 @@ namespace Glitch.Notifier.AspNet.ErrorContentFilters
           FromFormVariablesWithNamesContaining(this ErrorContentFilter filter,
                                           params string[] fields)
         {
-            filter.FromDataGroupWithFieldsContaining("Form", fields);
+            filter.FromDataGroupWithKeysContaining("Form", fields);
             return filter;
         }
 
@@ -36,7 +36,7 @@ namespace Glitch.Notifier.AspNet.ErrorContentFilters
           FromHttpHeadersWithNamesContaining(this ErrorContentFilter filter,
                                           params string[] fields)
         {
-            filter.FromDataGroupWithFieldsContaining("HttpHeaders", fields);
+            filter.FromDataGroupWithKeysContaining("HttpHeaders", fields);
             return filter;
         }
     }

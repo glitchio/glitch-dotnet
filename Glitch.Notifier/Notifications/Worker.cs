@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace Glitch.Notifier.Notifications
 {
-    public abstract class Worker
+    abstract class Worker
     {
         private readonly object _lock = new object();
         private Thread _thread;
@@ -32,6 +32,7 @@ namespace Glitch.Notifier.Notifications
                 {
                     DoWork(_stopEvent);
                 }
+                DoWork(_stopEvent);
             }
             catch
             {

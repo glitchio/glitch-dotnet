@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace Glitch.Notifier.Notifications
@@ -10,7 +7,6 @@ namespace Glitch.Notifier.Notifications
     internal static class ErrorQueue
     {
         private static readonly Queue<Error> Queue = new Queue<Error>();
-        private static readonly ReaderWriterLockSlim LockSlim = new ReaderWriterLockSlim();
         private static readonly ManualResetEvent HasEnoughItemsEvent = new ManualResetEvent(false);
 
         private static int MaximumBatchSize
@@ -23,18 +19,13 @@ namespace Glitch.Notifier.Notifications
 
         public static void Push(Error item)
         {
-            LockSlim.EnterWriteLock();
-            try
+            lock (Queue)
             {
                 Queue.Enqueue(item);
                 if (Queue.Count >= MaximumBatchSize)
                 {
                     HasEnoughItemsEvent.Set();
                 }
-            }
-            finally
-            {
-                LockSlim.ExitWriteLock();
             }
         }
 
@@ -46,32 +37,26 @@ namespace Glitch.Notifier.Notifications
 
         private static Error[] Pop()
         {
-            LockSlim.EnterWriteLock();
-            try
+            lock (Queue)
             {
-                var items = Queue.Take(MaximumBatchSize).ToArray();
+                var items = new List<Error>();
+                var count = MaximumBatchSize > Queue.Count ? Queue.Count : MaximumBatchSize;
+                for (var i = 0; i < count; i++)
+                {
+                    items.Add(Queue.Dequeue());
+                }
                 if (Queue.Count < MaximumBatchSize) HasEnoughItemsEvent.Reset();
-                return items;
-            }
-            finally
-            {
-                LockSlim.ExitWriteLock();
+                return items.ToArray();
             }
         }
 
         internal static void Clear()
         {
-            LockSlim.EnterWriteLock();
-            try
+            lock (Queue)
             {
                 Queue.Clear();
                 HasEnoughItemsEvent.Reset();
             }
-            finally
-            {
-                LockSlim.ExitWriteLock();
-            }
         }
-
     }
 }

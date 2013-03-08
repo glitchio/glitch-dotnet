@@ -7,20 +7,19 @@ using Glitch.Notifier.Notifications;
 
 namespace Glitch.Notifier.AspNet
 {
-
     /// http://haacked.com/archive/2011/10/16/the-dangers-of-implementing-recurring-background-tasks-in-asp-net.aspx
     class RegisteredObjectWrapper : IRegisteredObject
     {
-        private readonly Worker _worker;
+        private readonly Action<TimeSpan> _stopAction;
 
-        public RegisteredObjectWrapper(Worker worker)
+        public RegisteredObjectWrapper(Action<TimeSpan> stopAction)
         {
-            _worker = worker;
+            _stopAction = stopAction;
         }
 
         public void Stop(bool immediate)
         {
-            _worker.Stop(TimeSpan.FromSeconds(immediate ? 0 : 30));
+            _stopAction(TimeSpan.FromSeconds(immediate ? 0 : 30));
             HostingEnvironment.UnregisterObject(this);
         }
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
 
 namespace Glitch.Notifier
 {
@@ -10,6 +9,8 @@ namespace Glitch.Notifier
         public static readonly GlitchConfig Config;
 
         public static readonly GlitchErrorFactory Factory = new GlitchErrorFactory();
+
+        public static readonly GlitchNotifications Notifications = new GlitchNotifications();
 
         static Glitch()
         {

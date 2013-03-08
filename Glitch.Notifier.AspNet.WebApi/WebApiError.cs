@@ -39,6 +39,7 @@ namespace Glitch.Notifier.AspNet.WebApi
 
         public WebApiError WithHttpStatusCode()
         {
+            if (_context.Response == null) return this;
             Error.With("HttpStatusCode", _context.Response.StatusCode);
             return this;
         }

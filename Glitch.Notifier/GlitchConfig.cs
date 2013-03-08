@@ -15,6 +15,14 @@ namespace Glitch.Notifier
             WithNotificationsMaxBatchSize(section.NotificationsMaxBatchSize);
             WithNotificationsMaxInterval(TimeSpan.FromMinutes(section.NotificationsMaxIntervalInMinutes));
             SendNotifications(section.Notify);
+            foreach(var contentFilter in section.IgnoreContent)
+            {
+                IgnoreContent.FromDataGroupWithKeysContaining(contentFilter.DataGroup, contentFilter.KeyContains);
+            }
+            foreach(var exceptionFilter in section.IgnoreErrors)
+            {
+                IgnoreErrors.WithFilter(exceptionFilter.CreateFilter());
+            }
         }
 
         public GlitchConfig WithApiKey(string apiKey)

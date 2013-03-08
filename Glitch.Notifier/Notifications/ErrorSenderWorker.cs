@@ -4,13 +4,11 @@ using System.Threading;
 
 namespace Glitch.Notifier.Notifications
 {
-    public class ErrorSenderWorker : Worker
+    class ErrorSenderWorker : Worker
     {
         private readonly static ErrorSenderWorker _instance = new ErrorSenderWorker();
 
         public event Action<ErrorBatchDeliveryInfo> OnBatchDelivered = delegate { };
-
-        internal ErrorSenderWorker() { }
 
         public static ErrorSenderWorker Instance
         {

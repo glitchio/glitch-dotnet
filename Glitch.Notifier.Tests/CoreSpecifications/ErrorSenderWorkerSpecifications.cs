@@ -54,7 +54,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications
         }
 
         [TestMethod]
-        public void Given_the_queue_has_less_items_than_the_max_batch_Should_not_wait()
+        public void Given_the_queue_has_the_same_or_more_items_than_the_max_batch_Should_not_wait()
         {
             ErrorQueue.Push(new Error("error"));
 
@@ -86,7 +86,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications
         }
     }
 
-    public class TestErrorSenderWorker : ErrorSenderWorker
+    class TestErrorSenderWorker : ErrorSenderWorker
     {
         private readonly TaskCompletionSource<ErrorBatch> _taskCompletionSource = new TaskCompletionSource<ErrorBatch>();
 

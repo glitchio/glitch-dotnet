@@ -24,7 +24,7 @@ namespace Glitch.Notifier.ErrorContentFilters
                 .ForEach(k => data[k] = ProtectedText);
         }
 
-        public ErrorContentFilter FromDataGroupWithFieldsContaining(string dataGroupKey, 
+        public ErrorContentFilter FromDataGroupWithKeysContaining(string dataGroupKey, 
                                                                     params string[] fields)
         {
            List<string> dataFields;

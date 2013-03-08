@@ -13,9 +13,9 @@ namespace Glitch.Notifier
             //If an exception was provided, we have more info to create a groupKey
             if (error.Exception != null)
             {
-                //For the hash, only the error message and the first line of the stacktrace 
+                //For the hash, only the error message, error type and the first line of the stacktrace 
                 //are considered.
-                hashSeed = string.Format("{0}|{1}", error.Exception.Message, 
+                hashSeed = string.Format("{0}|{1}|{2}", error.Exception.Message, error.Exception.GetType().Name, 
                                          error.Exception.GetStackTraceFirstLine());
             }
             else
