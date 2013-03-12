@@ -8,6 +8,8 @@ copy Glitch.Notifier.AspNet.Mvc\bin\Release\Glitch.Notifier.AspNet.Mvc.dll nuget
 
 copy Glitch.Notifier.AspNet.WebApi\bin\Release\Glitch.Notifier.AspNet.WebApi.dll nuget\Glitch.Notifier.AspNet.WebApi\lib\40
 
+copy Glitch.Notifier.Wcf\bin\Release\Glitch.Notifier.Wcf.dll nuget\Glitch.Notifier.Wcf\lib\35
+
 cd nuget\Glitch.Notifier
 ..\..\tools\nuget.exe pack
 cd ..\Glitch.Notifier.AspNet
@@ -15,4 +17,6 @@ cd ..\Glitch.Notifier.AspNet
 cd ..\Glitch.Notifier.AspNet.Mvc
 ..\..\tools\nuget.exe pack
 cd ..\Glitch.Notifier.AspNet.WebApi
+..\..\tools\nuget.exe pack
+cd ..\Glitch.Notifier.Wcf
 ..\..\tools\nuget.exe pack
