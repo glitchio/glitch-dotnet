@@ -11,7 +11,7 @@ namespace Glitch.Notifier
         public Error(string errorMessage)
         {
             if (string.IsNullOrEmpty(errorMessage)) throw new ArgumentException("errorMessage cannot be null or empty");
-            ExtraData = new Dictionary<string, object>();
+            ErrorData = new Dictionary<string, object>();
             ErrorMessage = errorMessage;
             OccurredAt = DateTime.UtcNow;
         }
@@ -22,13 +22,13 @@ namespace Glitch.Notifier
             if (exception == null) throw new ArgumentNullException("exception");
             Exception = exception;
             //Get only the stacktrace instead? What if there are inner exceptions?
-            ExtraData["StackTrace"] = exception.ToString();
+            ErrorData["StackTrace"] = exception.ToString();
         }
 
         [IgnoreDataMember]
         public Exception Exception { get; private set; }
 
-        public Dictionary<string, object> ExtraData { get; internal set; }
+        public Dictionary<string, object> ErrorData { get; internal set; }
         public string ErrorMessage { get; internal set; }
         public string Profile { get; internal set; }
 
@@ -69,7 +69,7 @@ namespace Glitch.Notifier
             if (string.IsNullOrEmpty(key)) throw new ArgumentException("key cannot be null or empty");
             if (value == null) return this;
 
-            ExtraData[key] = value;
+            ErrorData[key] = value;
             return this;
         }
 

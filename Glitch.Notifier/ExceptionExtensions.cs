@@ -10,6 +10,7 @@ namespace Glitch.Notifier
         public static string GetStackTraceFirstLine(this Exception exception)
         {
             var stackTrace = exception.StackTrace;
+            if (stackTrace == null) return string.Empty;
             using(var stringReader = new StringReader(stackTrace))
             {
                 return stringReader.ReadLine();

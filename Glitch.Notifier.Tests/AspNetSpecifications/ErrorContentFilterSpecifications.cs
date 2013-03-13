@@ -29,9 +29,9 @@ namespace Glitch.Notifier.Tests.AspNetSpecifications
                 .WithCookies();
 
             Assert.AreEqual("value", 
-                ((Dictionary<string, string>)wrapper.Error.ExtraData["Cookies"])["Test1"]);
+                ((Dictionary<string, string>)wrapper.Error.ErrorData["Cookies"])["Test1"]);
             Assert.AreEqual(ErrorContentFilter.ProtectedText,
-                ((Dictionary<string, string>)wrapper.Error.ExtraData["Cookies"])[".ASPXAUTH"]);
+                ((Dictionary<string, string>)wrapper.Error.ErrorData["Cookies"])[".ASPXAUTH"]);
         }
 
         [TestMethod]
@@ -51,9 +51,9 @@ namespace Glitch.Notifier.Tests.AspNetSpecifications
                 .WithServerVariables();
 
             Assert.AreEqual("value",
-                ((Dictionary<string, string>)wrapper.Error.ExtraData["ServerVariables"])["Test1"]);
+                ((Dictionary<string, string>)wrapper.Error.ErrorData["ServerVariables"])["Test1"]);
             Assert.AreEqual(ErrorContentFilter.ProtectedText,
-                ((Dictionary<string, string>)wrapper.Error.ExtraData["ServerVariables"])["AUTH_PASSWORD"]);
+                ((Dictionary<string, string>)wrapper.Error.ErrorData["ServerVariables"])["AUTH_PASSWORD"]);
         }
 
         [TestMethod]
@@ -73,9 +73,9 @@ namespace Glitch.Notifier.Tests.AspNetSpecifications
                 .WithForm();
 
             Assert.AreEqual("value",
-                ((Dictionary<string, string>)wrapper.Error.ExtraData["Form"])["Test1"]);
+                ((Dictionary<string, string>)wrapper.Error.ErrorData["Form"])["Test1"]);
             Assert.AreEqual(ErrorContentFilter.ProtectedText,
-                ((Dictionary<string, string>)wrapper.Error.ExtraData["Form"])["_VIEWSTATE"]);
+                ((Dictionary<string, string>)wrapper.Error.ErrorData["Form"])["_VIEWSTATE"]);
         }
 
         [TestMethod]
@@ -95,9 +95,9 @@ namespace Glitch.Notifier.Tests.AspNetSpecifications
                 .WithHttpHeaders();
 
             Assert.AreEqual("value",
-                ((Dictionary<string, string>)wrapper.Error.ExtraData["HttpHeaders"])["Test1"]);
+                ((Dictionary<string, string>)wrapper.Error.ErrorData["HttpHeaders"])["Test1"]);
             Assert.AreEqual(ErrorContentFilter.ProtectedText,
-                ((Dictionary<string, string>)wrapper.Error.ExtraData["HttpHeaders"])["Auhorization"]);
+                ((Dictionary<string, string>)wrapper.Error.ErrorData["HttpHeaders"])["Auhorization"]);
         }
     }
 }

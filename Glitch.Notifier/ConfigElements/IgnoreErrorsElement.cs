@@ -62,7 +62,7 @@ namespace Glitch.Notifier.ConfigElements
             return new ExpressionErrorFilter(error =>
                                                  {
                                                      object value;
-                                                     if (!error.ExtraData.TryGetValue(FilterKey, out value) || value == null || value.GetType() != typeof(string))
+                                                     if (!error.ErrorData.TryGetValue(FilterKey, out value) || value == null || value.GetType() != typeof(string))
                                                          return false;
                                                      return new Regex(Expression).IsMatch(value.ToString());
                                                  });

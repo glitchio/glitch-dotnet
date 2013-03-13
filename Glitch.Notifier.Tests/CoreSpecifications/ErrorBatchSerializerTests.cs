@@ -22,7 +22,7 @@ namespace Glitch.Notifier.Tests.CoreSpecifications
 
             var json = ErrorBatchSerializer.Serialize(errorBatch);
 
-            Assert.IsTrue(json.StartsWith("{\"errors\":[{\"extraData\":{\"StackTrace\":\"System.InvalidOperationException: test\"},\"errorMessage\":\"test\",\"occurredAt\":\"201"));
+            Assert.IsTrue(json.StartsWith("{\"errors\":[{\"errorData\":{\"StackTrace\":\"System.InvalidOperationException: test\"},\"errorMessage\":\"test\",\"occurredAt\":\"201"));
         }
     }
 }

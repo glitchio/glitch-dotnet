@@ -17,7 +17,7 @@ namespace Glitch.Notifier.AspNet.ErrorFilters
         public bool Exclude(Error error)
         {
             object code;
-            return error.ExtraData.TryGetValue("HttpStatusCode", out code) && code != null &&
+            return error.ErrorData.TryGetValue("HttpStatusCode", out code) && code != null &&
                 int.Parse(code.ToString()) == (int) _httpCode;
         }
     }

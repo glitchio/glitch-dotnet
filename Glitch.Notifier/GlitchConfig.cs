@@ -93,6 +93,7 @@ namespace Glitch.Notifier
             get
             {
                 return Glitch.Config.Scheme + "://api.glitch.io/v1/errors";
+                //return Glitch.Config.Scheme + "://localhost:1289/v1/errors";
             }
         }
 

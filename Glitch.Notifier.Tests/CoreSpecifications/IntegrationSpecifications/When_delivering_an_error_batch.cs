@@ -23,14 +23,27 @@ namespace Glitch.Notifier.Tests.CoreSpecifications.IntegrationSpecifications
         {
             Glitch.Config.WithHttps(false)
                 .WithApiKey("4b5edd5ccef34e999ab6a40798f68de1")
+                //.WithApiKey("72b46c3926ef438696a48238b777aa8f")
                 .WithNotificationsMaxBatchSize(2);
             ErrorQueue.Clear();
 
             Glitch.Notifications.OnBatchDelivered += Instance_OnBatchDelivered;
+            try
+            {
+                throw new InvalidOperationException("test1");
+            }
+            catch (Exception ex)
+            {
+                Glitch.Factory.Error(ex)
+                            .With("TestKey", "TestValue")
+                            .WithUser("testUser1")
+                            .WithLocation("http://test/12234")
+                            .Send();
+            }
 
-            Glitch.Factory.Error("Test error")
-                          .Send();
-            Glitch.Factory.Error("Test error 2")
+            Glitch.Factory.Error(new ArgumentException("test2"))
+                          .WithUser("testUser2")
+                          .WithLocation("Controller1#Action2")
                           .Send();
 
             Assert.IsTrue(ErrorDeliveryTask.Wait(TimeSpan.FromMinutes(1)));

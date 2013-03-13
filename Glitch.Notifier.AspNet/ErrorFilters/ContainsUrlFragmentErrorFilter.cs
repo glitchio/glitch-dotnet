@@ -19,7 +19,7 @@ namespace Glitch.Notifier.AspNet.ErrorFilters
         public bool Exclude(Error error)
         {
             object url;
-            return error.ExtraData.TryGetValue("Url", out url) && url != null &&
+            return error.ErrorData.TryGetValue("Url", out url) && url != null &&
                 url.ToString().IndexOf(_urlFragment, StringComparison.OrdinalIgnoreCase)!=-1;
         }
     }
