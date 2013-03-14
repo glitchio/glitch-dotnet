@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
+using System.Web;
 
 namespace Glitch.Notifier.Wcf
 {
@@ -23,6 +24,11 @@ namespace Glitch.Notifier.Wcf
         /// </returns>
         public bool HandleError(Exception error)
         {
+            if (HttpContext.Current != null)
+            {
+                HttpContext.Current.Items["Glitch.ErrorHandled"] = true;
+            }
+
             Glitch.Factory.Error(error)
                             .Send();
             return false;
