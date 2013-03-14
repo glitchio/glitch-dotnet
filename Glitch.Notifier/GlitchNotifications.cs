@@ -11,6 +11,7 @@ namespace Glitch.Notifier
         public GlitchNotifications()
         {
             ErrorSenderWorker.Instance.OnBatchDelivered += info => OnBatchDelivered(info);
+            ErrorQueue.OnErrorPushing += error => OnErrorDelivering(error);
         }
 
         public bool Stop(TimeSpan timeout)
@@ -19,5 +20,7 @@ namespace Glitch.Notifier
         }
 
         public event Action<ErrorBatchDeliveryInfo> OnBatchDelivered = delegate { };
+
+        public event Action<Error> OnErrorDelivering = delegate { };
     }
 }

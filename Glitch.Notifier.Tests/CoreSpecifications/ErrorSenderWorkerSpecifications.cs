@@ -84,6 +84,23 @@ namespace Glitch.Notifier.Tests.CoreSpecifications
 
             Assert.AreEqual(1, _testErrorSenderWorker.DeliveredTask.Result.Errors.Length);
         }
+
+        [TestMethod]
+        public void Given_the_message_is_modified_through_the_on_delivery_error_Should_reflect_it_in_the_notified_error()
+        {
+            var guid = Guid.NewGuid().ToString();
+            Action<Error> action = error => error.Location = guid;
+            Glitch.Notifications.OnErrorDelivering += action;
+
+            ErrorQueue.Push(new Error("error"));
+            _testErrorSenderWorker.Start();
+            Assert.IsTrue(_testErrorSenderWorker.Stop(TimeSpan.FromSeconds(10)));
+            Glitch.Notifications.OnErrorDelivering -= action;
+            Assert.IsTrue(_testErrorSenderWorker.DeliveredTask.Wait(TimeSpan.Zero));
+
+            Assert.AreEqual(guid, _testErrorSenderWorker.DeliveredTask.Result.Errors.First().Location);
+
+        }
     }
 
     class TestErrorSenderWorker : ErrorSenderWorker

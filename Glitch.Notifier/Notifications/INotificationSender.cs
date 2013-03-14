@@ -1,8 +1,10 @@
 
+using System;
+
 namespace Glitch.Notifier.Notifications
 {
     internal interface INotificationSender
     {
-        void Send(Error entity);
+        void Send(Error error);
     }
 }

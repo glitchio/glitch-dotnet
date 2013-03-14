@@ -8,6 +8,7 @@ namespace Glitch.Notifier.Notifications
     {
         private static readonly Queue<Error> Queue = new Queue<Error>();
         private static readonly ManualResetEvent HasEnoughItemsEvent = new ManualResetEvent(false);
+        public static event Action<Error> OnErrorPushing = delegate { };
 
         private static int MaximumBatchSize
         {
@@ -19,6 +20,7 @@ namespace Glitch.Notifier.Notifications
 
         public static void Push(Error item)
         {
+            OnErrorPushing(item);
             lock (Queue)
             {
                 Queue.Enqueue(item);
