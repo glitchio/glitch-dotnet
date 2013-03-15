@@ -30,6 +30,7 @@ namespace Glitch.Notifier.Wcf
             }
 
             Glitch.Factory.Error(error)
+                            .SetPlatform("WCF")
                             .Send();
             return false;
         }

@@ -14,6 +14,7 @@ namespace Glitch.Notifier
             ErrorData = new Dictionary<string, object>();
             ErrorMessage = errorMessage;
             OccurredAt = DateTime.UtcNow;
+            Platform = ".NET";
         }
 
         public Error(Exception exception)
@@ -37,6 +38,7 @@ namespace Glitch.Notifier
         public DateTime OccurredAt { get; internal set; }
         public string User { get; internal set; }
         public string Location { get; internal set; }
+        public string Platform { get; internal set; }
 
         public Error WithErrorProfile(string profile)
         {
@@ -48,6 +50,12 @@ namespace Glitch.Notifier
         public Error WithUser(string user)
         {
             User = user;
+            return this;
+        }
+
+        public Error SetPlatform(string platform)
+        {
+            Platform = platform;
             return this;
         }
 

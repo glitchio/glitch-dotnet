@@ -12,7 +12,8 @@ namespace Glitch.Notifier.AspNet
             : base(new Error(exception))
         {
             HttpContext = httpContext;
-            Error.WithLocation(HttpContext.GetUrl());
+            Error.WithLocation(HttpContext.GetUrl())
+                .SetPlatform("ASP.NET");
         }
     }
 

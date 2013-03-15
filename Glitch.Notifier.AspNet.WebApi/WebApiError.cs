@@ -14,7 +14,8 @@ namespace Glitch.Notifier.AspNet.WebApi
             : base(new Error(context.Exception))
         {
             _context = context;
-            Error.WithLocation(GetController() + "#" + GetAction());
+            Error.WithLocation(GetController() + "#" + GetAction())
+                .SetPlatform("ASP.NET WebApi");
         }
 
         public WebApiError WithContextData()

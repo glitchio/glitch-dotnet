@@ -10,7 +10,8 @@ namespace Glitch.Notifier.AspNet.Mvc
             : base(exceptionContext.Exception, exceptionContext.HttpContext)
         {
             _exceptionContext = exceptionContext;
-            Error.WithLocation(GetController() + "#" + GetAction());
+            Error.WithLocation(GetController() + "#" + GetAction())
+                .SetPlatform("ASP.NET MVC");
         }
 
         public MvcError WithContextData()
