@@ -29,9 +29,10 @@ namespace Glitch.Notifier.Wcf
                 HttpContext.Current.Items["Glitch.ErrorHandled"] = true;
             }
 
-            Glitch.Factory.Error(error)
-                            .SetPlatform("WCF")
-                            .Send();
+            Glitch.Factory.WcfError(error, OperationContext.Current, "glitch/v1.net.wcf")
+                          .WithContextData()
+                          .Send();
+
             return false;
         }
     }

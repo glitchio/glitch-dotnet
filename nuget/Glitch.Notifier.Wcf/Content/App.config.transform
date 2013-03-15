@@ -1,8 +1,10 @@
-<system.serviceModel>
-    <extensions>
-      <behaviorExtensions>
-	  	<!-- Add <errorLogging/> within your service behavior definition-->
-        <add name="errorLogging" type="Glitch.Notifier.Wcf.ErrorHandlerBehavior, Glitch.Notifier.Wcf, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null"/>
-      </behaviorExtensions>
-    </extensions>
-</system.serviceModel>
+<configuration>
+	<system.serviceModel>
+		<extensions>
+		  <behaviorExtensions>
+			<!-- Add <errorLogging/> within your service behavior definition-->
+			<add name="errorLogging" type="Glitch.Notifier.Wcf.ErrorHandlerBehavior, Glitch.Notifier.Wcf, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null"/>
+		  </behaviorExtensions>
+		</extensions>
+	</system.serviceModel>
+</configuration>
