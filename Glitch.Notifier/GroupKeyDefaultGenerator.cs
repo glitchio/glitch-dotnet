@@ -13,10 +13,12 @@ namespace Glitch.Notifier
             //If an exception was provided, we have more info to create a groupKey
             if (error.Exception != null)
             {
-                //For the hash, only the error message, error type and the first line of the stacktrace 
-                //are considered.
-                hashSeed = string.Format("{0}|{1}|{2}", error.Exception.Message, error.Exception.GetType().Name, 
-                                         error.Exception.GetStackTraceFirstLine());
+                var stackTraceFirstLine = error.Exception.GetStackTraceFirstLine();
+                //For the hash, we take the error type and the first line of the stack trace
+                //If the stack trace is no available (an Exception that wasn't thrown is passed)
+                //then we take the error message instead.
+                hashSeed = string.Format("{0}|{1}", error.Exception.GetType().Name,
+                                        stackTraceFirstLine ?? error.ErrorMessage);
             }
             else
             {
