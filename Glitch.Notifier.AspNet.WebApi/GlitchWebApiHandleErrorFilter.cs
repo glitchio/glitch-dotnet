@@ -10,7 +10,7 @@ namespace Glitch.Notifier.AspNet.WebApi
     {
         public string ErrorProfile { get; set; }
 
-        public GlitchWebApiHandleErrorFilter(string errorProfile = "glitch/v1.net.webapi")
+        public GlitchWebApiHandleErrorFilter(string errorProfile = "glitch/v1.net.asp.webapi")
         {
             ErrorProfile = errorProfile;
         }

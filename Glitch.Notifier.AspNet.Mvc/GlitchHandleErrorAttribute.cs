@@ -9,7 +9,7 @@ namespace Glitch.Notifier.AspNet.Mvc
     {
         public string ErrorProfile { get; set; }
 
-        public GlitchHandleErrorAttribute(string errorProfile = "glitch/v1.net.mvc")
+        public GlitchHandleErrorAttribute(string errorProfile = "glitch/v1.net.asp.mvc")
         {
             ErrorProfile = errorProfile;
         }
