@@ -27,7 +27,10 @@ namespace Glitch.Notifier.AspNet.WebApi
                 .WithQueryString()
                 .WithCurrentUser()
                 .WithHttpStatusCode()
-                .WithCookies();
+                .WithCookies()
+                .WithServerInfo()
+                .WithClientInfo()
+                .WithServerVariables();
         }
 
         public WebApiError WithHttpHeaders()
@@ -63,6 +66,15 @@ namespace Glitch.Notifier.AspNet.WebApi
             var cookies = new HttpContextWrapper(HttpContext.Current).GetCookies();
             Glitch.Config.IgnoreContent.Filter("Cookies", cookies);
             Error.With("Cookies", cookies);
+            return this;
+        }
+
+        public WebApiError WithServerVariables()
+        {
+            if (HttpContext.Current == null) return this;
+            var serverVariables = new HttpContextWrapper(HttpContext.Current).GetServerVariables();
+            Glitch.Config.IgnoreContent.Filter("ServerVariables", serverVariables);
+            Error.With("ServerVariables", serverVariables);
             return this;
         }
 
