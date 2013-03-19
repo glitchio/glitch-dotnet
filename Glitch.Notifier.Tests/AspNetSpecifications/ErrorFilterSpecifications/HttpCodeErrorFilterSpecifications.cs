@@ -48,8 +48,7 @@ namespace Glitch.Notifier.Tests.AspNetSpecifications.ErrorFilterSpecifications
         public void Given_http_code_does_match_Should_exclude_error()
         {
             //Arrange
-            HttpResponse.Setup(r => r.StatusCode).Returns(404);
-            var wrapper = Glitch.Factory.HttpContextError(new ArgumentException(), HttpContext.Object).WithHttpStatusCode();
+            var wrapper = Glitch.Factory.HttpContextError(new HttpException(404, "error"), HttpContext.Object).WithHttpStatusCode();
 
             //Act
             var exclude = new HttpCodeErrorFilter(HttpStatusCode.NotFound).Exclude(wrapper.Error);
