@@ -47,11 +47,11 @@ namespace Glitch.Notifier.AspNet
             if (HttpContext.Current.Items.Contains("Glitch.ErrorHandled")) return;
 
             var exception = HttpContext.Current.Server.GetLastError();
-            if (exception.InnerException == null) return;
+            var httpException = exception as HttpException ?? new HttpException(null, exception);
 
             try
             {
-                Glitch.Factory.HttpContextError(exception.InnerException, ErrorProfile)
+                Glitch.Factory.HttpContextError(httpException, ErrorProfile)
                       .WithContextData()
                       .Send();
             }

@@ -7,13 +7,21 @@ namespace Glitch.Notifier.AspNet
     public class HttpContextError:ErrorContextWrapper
     {
         public HttpContextBase HttpContext { get; private set; }
+        public HttpException HttpException { get; private set; }
 
-        public HttpContextError(Exception exception, HttpContextBase httpContext)
-            : base(new Error(exception))
+        public HttpContextError(HttpException exception, HttpContextBase httpContext)
+            : base(new Error(exception.GetBaseException()))
         {
             HttpContext = httpContext;
+            HttpException = exception;
             Error.WithLocation(HttpContext.GetUrl())
                 .SetPlatform("ASP.NET");
+        }
+
+        public HttpContextError(Exception exception, HttpContextBase httpContext)
+            : this(new HttpException(null, exception), httpContext )
+        {
+           
         }
     }
 
@@ -53,7 +61,7 @@ namespace Glitch.Notifier.AspNet
 
         public static T WithHttpStatusCode<T>(this T wrapper) where T : HttpContextError
         {
-            wrapper.Error.With("HttpStatusCode", wrapper.HttpContext.GetStatusCode());
+            wrapper.Error.With("HttpStatusCode", wrapper.HttpException.GetHttpCode());
             return wrapper;
         }
 

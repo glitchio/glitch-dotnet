@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 
 namespace Glitch.Notifier.AspNet.Mvc
 {
@@ -8,7 +9,7 @@ namespace Glitch.Notifier.AspNet.Mvc
 
         public MvcError(ExceptionContext exceptionContext)
             : base(exceptionContext.Exception, exceptionContext.HttpContext)
-        {
+        { 
             _exceptionContext = exceptionContext;
             Error.WithLocation(GetController() + "#" + GetAction())
                 .SetPlatform("ASP.NET MVC");

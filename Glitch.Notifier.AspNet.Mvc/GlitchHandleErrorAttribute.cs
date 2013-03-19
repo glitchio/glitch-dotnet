@@ -16,6 +16,7 @@ namespace Glitch.Notifier.AspNet.Mvc
 
         public override void OnException(ExceptionContext exceptionContext)
         {
+            base.OnException(exceptionContext);
             if(HttpContext.Current != null)
             {
                 HttpContext.Current.Items["Glitch.ErrorHandled"] = true;
@@ -30,8 +31,6 @@ namespace Glitch.Notifier.AspNet.Mvc
             {
                 Trace.Write(ex.ToString());
             }
-           
-            base.OnException(exceptionContext);
         }
     }
 }

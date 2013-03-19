@@ -41,11 +41,6 @@ namespace Glitch.Notifier.AspNet.Utils
             return user;
         }
 
-        public static int GetStatusCode(this HttpContextBase context)
-        {
-            return context.Response.StatusCode;
-        }
-
         public static string GetHttpMethod(this HttpContextBase context)
         {
             return context.Request.HttpMethod;
