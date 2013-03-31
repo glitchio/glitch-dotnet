@@ -27,7 +27,7 @@ namespace Glitch.Notifier.AspNet
                     if (!_applicationStarted)
                     {
                         //content filter defaults
-                        Glitch.Config.IgnoreContent.FromCookiesWithNamesContaining(".APXAUTH")
+                        Glitch.Config.IgnoreContent.FromCookiesWithNamesContaining(".ASPXAUTH")
                             .FromFormVariablesWithNamesContaining("_VIEWSTATE")
                             .FromServerVariablesWithNamesContaining("AUTH_PASSWORD");
 
